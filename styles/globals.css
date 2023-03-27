@@ -1,14 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/*@layer base {
-    body {
-        @apply font-roboto;
-    }
-}*/
-/ @layer components {
-    .btn {
-    }
+@layer base {
+  :root {
+    --background-primary-color: 255 255 255;
+    --background-secondary-color: #f5f5fa;
+    --primary-color: #0060ff;
+    --text-primary-color: 56 56 61;
+    --text-secondary-color: 128 128 137;
+  }
 }

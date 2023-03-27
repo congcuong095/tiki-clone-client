@@ -10,6 +10,13 @@ module.exports = {
     ],
     theme: {
         extend: {},
+        colors: {
+            primaryColor: '#0060ff',
+            backgroundPrimary: 'rgb(var(--background-primary-color) / <alpha-value>)',
+            backgroundSecondary: '#f5f5fa',
+            textPrimary: 'rgb(var(--text-primary-color) / <alpha-value>)',
+            textSecondary: 'rgb(var(--text-secondary-color) / <alpha-value>)',
+        },
     },
     plugins: [],
 };
