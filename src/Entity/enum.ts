@@ -1,11 +1,7 @@
 export enum filterTypeOfList {
-    childlist = 1,
-    location = 2,
-    select = 3,
-    optional = 4,
-    link = 5,
-    range = 6,
-    radio = 7,
+    childlist,
+    select,
+    range,
 }
 
 export enum filterTitle {

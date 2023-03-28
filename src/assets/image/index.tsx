@@ -8,6 +8,8 @@ const images = {
     locationIcon: require('./location-icon.png'),
     freeshipIcon: require('./freeship.png'),
     nextIcon: require('./next-icon.png'),
+    nowShip: require('./now-ship.png'),
+    astraSave: require('./astra-save.png'),
 };
 
 export default images;
