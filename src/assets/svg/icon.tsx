@@ -8,7 +8,7 @@ export const checkIcon = (
             height="15.1111"
             rx="3.11111"
             stroke="#C4C4CF"
-            stroke-width="0.888889"
+            strokeWidth="0.888889"
         />
     </svg>
 );
@@ -16,10 +16,10 @@ export const checkIcon = (
 export const checkedIcon = (
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
         <rect width="16" height="16" rx="3.55556" fill="#0B74E5" />
-        <g clip-path="url(#clip0_8876_82136)">
+        <g clipPath="url(#clip0_8876_82136)">
             <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
+                fillRule="evenodd"
+                clipRule="evenodd"
                 d="M12.4767 5.0895C12.7341 5.35276 12.7294 5.77485 12.4661 6.03225L7.46612 10.9211C7.20703 11.1745 6.79305 11.1745 6.53396 10.9211L3.53396 7.98781C3.2707 7.7304 3.26596 7.30832 3.52337 7.04506C3.78078 6.7818 4.20286 6.77706 4.46612 7.03447L7.00004 9.51208L11.534 5.07891C11.7972 4.8215 12.2193 4.82625 12.4767 5.0895Z"
                 fill="white"
             />
@@ -41,7 +41,7 @@ export const goldStar = (
         viewBox="0 0 12 12"
         className="star-icon"
     >
-        <g fill="none" fill-rule="evenodd">
+        <g fill="none" fillRule="evenodd">
             <path
                 fill="#fdd835"
                 transform="matrix(-1 0 0 1 11 1)"
@@ -65,7 +65,7 @@ export const grayStar = (
         viewBox="0 0 12 12"
         className="star-icon"
     >
-        <g fill="none" fill-rule="evenodd">
+        <g fill="none" fillRule="evenodd">
             <path
                 fill="#b8b8b8"
                 transform="matrix(-1 0 0 1 11 1)"
@@ -84,7 +84,7 @@ export const expandIcon = (
     <svg
         stroke="currentColor"
         fill="currentColor"
-        stroke-width="0"
+        strokeWidth="0"
         viewBox="0 0 512 512"
         color="#0B74E5"
         height="1em"
@@ -99,7 +99,7 @@ export const shortenIcon = (
     <svg
         stroke="currentColor"
         fill="currentColor"
-        stroke-width="0"
+        strokeWidth="0"
         viewBox="0 0 512 512"
         color="#0B74E5"
         height="1em"
@@ -114,8 +114,8 @@ export const nextIcon = (
     <svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path
             fill="#808089"
-            fill-rule="evenodd"
-            clip-rule="evenodd"
+            fillRule="evenodd"
+            clipRule="evenodd"
             d="M0.646447 0.646447C0.841709 0.451184 1.15829 0.451184 1.35355 0.646447L6.35355 5.64645C6.54882 5.84171 6.54882 6.15829 6.35355 6.35355L1.35355 11.3536C1.15829 11.5488 0.841709 11.5488 0.646447 11.3536C0.451184 11.1583 0.451184 10.8417 0.646447 10.6464L5.29289 6L0.646447 1.35355C0.451184 1.15829 0.451184 0.841709 0.646447 0.646447Z"
         ></path>
     </svg>

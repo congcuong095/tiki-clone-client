@@ -56,6 +56,7 @@ export interface selectData {
     list: {
         id: number;
         content: string;
+        image?: string;
     }[];
 }
 

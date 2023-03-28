@@ -1,8 +1,9 @@
 import { selectData } from '@/pages/api/hello';
 import { useState } from 'react';
 import { checkedIcon, checkIcon, expandIcon, shortenIcon } from '../assets/svg/icon';
+import SelectInput from './SelectInput';
 
-function Filter({ ...props }) {
+function FilterSelectInput({ ...props }) {
     const data: selectData = props.data;
     const [display, setDisplay] = useState(false);
     return (
@@ -20,16 +21,7 @@ function Filter({ ...props }) {
                                     key={item.id}
                                     className="list-item  flex items-center text-[13px] leading-[16px] capitalize mb-[12px] text-textPrimary"
                                 >
-                                    <label className="list-item-container mr-[2px] w-full items-start flex justify-start items-center">
-                                        <input type="checkbox" className="hidden" />
-                                        <span className="list-item-box mr-[12px] inline-block">
-                                            <div className="w-[16px] ">{checkIcon}</div>
-                                            <div className="hidden w-[16px] ">{checkedIcon}</div>
-                                        </span>
-                                        <div className="list-item-content inline-flex items-center min-h-[16px] flex-1 flex-wrap gap-[4px]">
-                                            <span className="list-item-content relative">{item.content}</span>
-                                        </div>
-                                    </label>
+                                    <SelectInput content={item.content} image={item.image} />
                                 </label>
                             );
                         }
@@ -38,16 +30,7 @@ function Filter({ ...props }) {
                                 key={item.id}
                                 className="list-item  flex items-center text-[13px] leading-[16px] capitalize mb-[12px] text-textPrimary"
                             >
-                                <label className="list-item-container mr-[2px] w-full items-start flex justify-start items-center">
-                                    <input type="checkbox" className="hidden" />
-                                    <span className="list-item-box mr-[12px] inline-block">
-                                        <div className="w-[16px] ">{checkIcon}</div>
-                                        <div className="hidden w-[16px] ">{checkedIcon}</div>
-                                    </span>
-                                    <div className="list-item-content inline-flex items-center min-h-[16px] flex-1 flex-wrap gap-[4px]">
-                                        <span className="list-item-content relative">{item.content}</span>
-                                    </div>
-                                </label>
+                                <SelectInput content={item.content} image={item.image} />
                             </label>
                         );
                     })}
@@ -64,4 +47,4 @@ function Filter({ ...props }) {
     );
 }
 
-export default Filter;
+export default FilterSelectInput;

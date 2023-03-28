@@ -1,6 +1,8 @@
+import { TopProductArticle } from "./Article";
+
 function Product() {
     return ( <>
-        <h1>Product</h1>
+        <TopProductArticle/>
     </> );
 }
 

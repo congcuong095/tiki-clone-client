@@ -1,10 +1,10 @@
 import { childListData, price, selectBrandData, selectColorData, servicesData } from '@/pages/api/hello';
-import { checkedIcon, checkIcon, goldStar, grayStar } from '../assets/svg/icon';
-import Image from 'next/image';
-import { filterTitle, filterTypeOfList } from '../Entity/enum';
+import {  goldStar, grayStar } from '../assets/svg/icon';
 
-import Filter from './Filter';
+
+import FilterSelectInput from './FilterSelectInput';
 import Button from './Button';
+import { UnderSidebarArticle } from './Article';
 
 function Sidebar() {
     const handlePrice = (price: number): string => {
@@ -17,25 +17,27 @@ function Sidebar() {
     };
     return (
         <>
-            <div className="wrapper bg-[#ffffff] w-[200px] round-t-[4px] rounded-b-[4px] overflow-hidden">
-                <div className="list px-[16px] pb-[12px]">
-                    <h4 className="list-title m-0 leading-[20px] block text-textPrimary text-[14px] py-[12px] font-medium">
-                        {childListData.title}
-                    </h4>
-                    <div className="list-main list-none">
-                        {childListData.list.map((item) => {
-                            return (
-                                <a
-                                    href={item.link}
-                                    key={item.id}
-                                    className="list-item text-[13px] pl-0 font-normal text-textPrimary pb-[12px] leading-[16px] flex items-center"
-                                >
-                                    {item.content}
-                                </a>
-                            );
-                        })}
+            <div className="wrapper bg-[#ffffff] w-[200px] rounded-l-[4px]  overflow-hidden">
+                {childListData && (
+                    <div className="list px-[16px] pb-[12px]">
+                        <h4 className="list-title m-0 leading-[20px] block text-textPrimary text-[14px] py-[12px] font-medium">
+                            {childListData.title}
+                        </h4>
+                        <div className="list-main list-none">
+                            {childListData.list.map((item) => {
+                                return (
+                                    <a
+                                        href={item.link}
+                                        key={item.id}
+                                        className="list-item text-[13px] pl-0 font-normal text-textPrimary pb-[12px] leading-[16px] flex items-center"
+                                    >
+                                        {item.content}
+                                    </a>
+                                );
+                            })}
+                        </div>
                     </div>
-                </div>
+                )}
                 {/* Địa chỉ */}
                 <div className="list px-[16px] pb-[12px] border-t border-solid border-[#ebebf0]">
                     <h4 className="list-title m-0 leading-[20px] block text-textPrimary text-[14px] py-[12px] font-medium">
@@ -49,38 +51,7 @@ function Sidebar() {
                     </div>
                 </div>
                 {/* Dich vu */}
-                <div className="list px-[16px] pb-[12px] border-t border-solid border-[#ebebf0]">
-                    <h4 className="list-title m-0 leading-[20px] block text-textPrimary text-[14px] py-[12px] font-medium">
-                        {servicesData.title}
-                    </h4>
-                    <div className="list-main list-none">
-                        {servicesData.list.map((item) => {
-                            return (
-                                <label
-                                    key={item.id}
-                                    className="list-item  flex items-center text-[13px] leading-[16px] capitalize mb-[12px] text-textPrimary"
-                                >
-                                    <label className="list-item-container mr-[2px] w-full items-start flex justify-start items-center">
-                                        <input type="checkbox" className="hidden" />
-                                        <span className="list-item-box mr-[12px] inline-block">
-                                            <div className="w-[16px] ">{checkIcon}</div>
-                                            <div className="hidden w-[16px] ">{checkedIcon}</div>
-                                        </span>
-                                        <div className="list-item-content inline-flex items-center min-h-[16px] flex-1 flex-wrap gap-[4px]">
-                                            <Image
-                                                src={item.image}
-                                                alt=""
-                                                className="list-item-img max-h-[10px] w-auto"
-                                            />
-                                            <span className="list-item-content relative">{item.content}</span>
-                                        </div>
-                                    </label>
-                                </label>
-                            );
-                        })}
-                    </div>
-                </div>
-
+                {servicesData && <FilterSelectInput data={servicesData} />}
                 {/* Đánh giá */}
                 <div className="list px-[16px] pb-[12px] border-t border-solid border-[#ebebf0]">
                     <h4 className="list-title m-0 leading-[20px] block text-textPrimary text-[14px] py-[12px] font-medium">
@@ -183,13 +154,16 @@ function Sidebar() {
                                 className="flex-1 w-[77px] h-[30px] px-[8px] bg-[#ffffff] rounded-[4px] text-left border border-solid border-[#b8b8b8] outline-none text-[13px]"
                             />
                         </div>
-                        <Button className="price-range-title border-[1px] border-solid border-primaryColor px-[15px] py-[5px] w-full mt-[8px] rounded-[4px] text-[13px] h-auto leading-none rounded-tr-[4px] rounded-br-[4px]">
+                        <Button className="price-range-title border-[1px] border-solid border-primaryColor px-[15px] py-[5px] w-full mt-[8px]  text-[13px] h-auto leading-none rounded-[8px]">
                             Áp dụng
                         </Button>
                     </div>
                 </div>
-                <Filter data={selectColorData} />
-                <Filter data={selectBrandData} />
+                {/* Mau sac */}
+                {selectColorData && <FilterSelectInput data={selectColorData} />}
+                {/* Thuong hieu */}
+                {selectBrandData && <FilterSelectInput data={selectBrandData} />}
+                <UnderSidebarArticle />
             </div>
         </>
     );

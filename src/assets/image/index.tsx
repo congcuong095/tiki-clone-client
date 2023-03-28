@@ -10,6 +10,7 @@ const images = {
     nextIcon: require('./next-icon.png'),
     nowShip: require('./now-ship.png'),
     astraSave: require('./astra-save.png'),
+    articleSidebar: require('./article-sidebar.jpg'),
 };
 
 export default images;
