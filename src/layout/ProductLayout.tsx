@@ -5,7 +5,7 @@ import { UnderHeaderArticle } from '../components/Article';
 import React from 'react';
 import { nextIcon } from '../assets/svg/icon';
 
-function ProductLayout({ children }: any) {
+function ProductLayout({ children, data }: any) {
     return (
         <>
             <Header />
@@ -34,7 +34,7 @@ function ProductLayout({ children }: any) {
                 </div>
                 <div className="container  w-[1270px] px-[15px] mx-[auto]">
                     <div className="container-view flex justify-between items-start w-full">
-                        <Sidebar />
+                        <Sidebar data={data} />
                         {children}
                     </div>
                 </div>

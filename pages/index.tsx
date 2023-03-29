@@ -1,22 +1,26 @@
 import Product from '@/src/components/Product';
 import ProductLayout from '@/src/layout/ProductLayout';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import { getAPI } from './api/axios';
 
 export default function Home() {
-    const [dataGet, setDataGet] = useState({});
+    const [data, setData] = useState<any>({});
+    const getData = () =>
+        getAPI().then((res) => {
+            if (res.status === 200) {
+                console.log(res.data);
+                setData(res.data);
+            } else {
+                console.log(res);
+            }
+        });
     useEffect(() => {
-        fetch(
-            'https://tiki.vn/api/personalish/v1/blocks/listings?limit=40&include=advertisement&aggregations=2&trackity_id=c6f19eee-d118-ea27-ead1-840849028e16&category=8594&page=1&urlKey=o-to-xe-may-xe-dap',
-        )
-            .then((res) => res.json())
-            .then((data) => {
-                console.log(data)
-                setDataGet(data)});
-    });
+        getData();
+    }, []);
     return (
         <>
-            <ProductLayout>
-                <Product data={dataGet} />
+            <ProductLayout data={data.filters}>
+                <Product />
             </ProductLayout>
         </>
     );

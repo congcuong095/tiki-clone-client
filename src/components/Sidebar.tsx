@@ -1,13 +1,19 @@
-import { childListData, price, selectBrandData, selectColorData, selectShipData, servicesData } from '@/pages/api/hello';
-import {  goldStar, grayStar } from '../assets/svg/icon';
-
+import {
+    childListData,
+    price,
+    selectBrandData,
+    selectColorData,
+    selectShipData,
+    servicesData,
+} from '@/pages/api/hello';
+import { goldStar, grayStar } from '../assets/svg/icon';
 
 import FilterSelectInput from './FilterSelectInput';
 import Button from './Button';
 import { UnderSidebarArticle } from './Article';
 import FilterRadioInput from './FilterRadioInput';
 
-function Sidebar() {
+function Sidebar({ data }: any) {
     const handlePrice = (price: number): string => {
         let newPrice: string = '';
         while (price % 1000 == 0) {
@@ -16,23 +22,25 @@ function Sidebar() {
         }
         return (newPrice = price + newPrice);
     };
+
+    const category = data != undefined && data.find((item: any) => item.query_name == 'category');
     return (
         <>
             <div className="wrapper bg-[#ffffff] w-[200px] rounded-l-[4px]  overflow-hidden">
-                {childListData && (
+                {category && (
                     <div className="list px-[16px] pb-[12px]">
                         <h4 className="list-title m-0 leading-[20px] block text-textPrimary text-[14px] py-[12px] font-medium">
-                            {childListData.title}
+                            {category.display_name}
                         </h4>
                         <div className="list-main list-none">
-                            {childListData.list.map((item) => {
+                            {category.values.map((item: any) => {
                                 return (
                                     <a
-                                        href={item.link}
-                                        key={item.id}
+                                        href={`${item.url_path}`}
+                                        key={item.query_value}
                                         className="list-item text-[13px] pl-0 font-normal text-textPrimary pb-[12px] leading-[16px] flex items-center"
                                     >
-                                        {item.content}
+                                        {item.display_value}
                                     </a>
                                 );
                             })}

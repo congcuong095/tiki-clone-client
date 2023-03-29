@@ -9,9 +9,9 @@ function Product(data: any) {
                 <div className="inner">
                     <div className="header">{/* <TopProductArticle/> */}</div>
                     <div className="main flex flex-wrap gap-[8px] bg-[transparent]">
-                        {data.map((item: any) => {
+                        {/* {data.map((item: any) => {
                             return <ProductItem key={item.id} dataProduct={item} />;
-                        })}
+                        })} */}
                     </div>
                     <div className="pagination"></div>
                 </div>
