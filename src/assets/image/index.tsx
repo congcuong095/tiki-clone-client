@@ -11,6 +11,10 @@ const images = {
     nowShip: require('./now-ship.png'),
     astraSave: require('./astra-save.png'),
     articleSidebar: require('./article-sidebar.jpg'),
+    radioIcon: require('./radio-icon.png'),
+    radioCheckedIcon: require('./radio-checked-icon.png'),
+    nextImage: require('./next-img.png'),
+    product: require('./product.jpg'),
 };
 
 export default images;

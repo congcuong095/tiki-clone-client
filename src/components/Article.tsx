@@ -29,12 +29,19 @@ export function UnderSidebarArticle() {
                     <div className="container absolute inset-0 flex flex-col">
                         <div className="image relative h-[calc(100%-215px)]">
                             <div className="image-bg bg-cover bg-no-repeat  w-full h-full bg-center blur-[50px]">
-                                <Image src={images.articleSidebar} alt="" className="image-img block w-full h-full " />
+                                {images.articleSidebar && (
+                                    <Image
+                                        src={images.articleSidebar}
+                                        alt=""
+                                        className="image-img block w-full h-full "
+                                    />
+                                )}
                             </div>
                             {images.articleSidebar && (
                                 <Image
                                     src={images.articleSidebar}
                                     alt=""
+                                    priority={true}
                                     className="image-img block w-[122px] h-[122px] absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] rounded-[4px] border border-solid border-[#ebebf0]"
                                 />
                             )}
@@ -46,10 +53,16 @@ export function UnderSidebarArticle() {
                             <div className="content-fund mt-[17px] text-[13px] leading-[18px] text-textSecondary shrink-0">
                                 Tài trợ bởi
                             </div>
-                            <div className="content-brand text-[13px] leading-[18px] text-[#27272a] overflow-hidden">OST store</div>
+                            <div className="content-brand text-[13px] leading-[18px] text-[#27272a] overflow-hidden">
+                                OST store
+                            </div>
                             <div className="content-action mt-auto">
-                                <div className="content-action-content mb-[8px] text-[14px] leading-[20px] font-medium text-primaryColor text-center">Giảm giá 20K</div>
-                                <div className="content-action-btn py-[5.5px] px-[12px] inline-flex items-center justify-center bg-primaryColor rounded-[4px] text-[14px] leading-[20px] font-medium text-[#ffffff]">Xem thêm</div>
+                                <div className="content-action-content mb-[8px] text-[14px] leading-[20px] font-medium text-primaryColor text-center">
+                                    Giảm giá 20K
+                                </div>
+                                <div className="content-action-btn py-[5.5px] px-[12px] inline-flex items-center justify-center bg-primaryColor rounded-[4px] text-[14px] leading-[20px] font-medium text-[#ffffff]">
+                                    Xem thêm
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -59,5 +72,18 @@ export function UnderSidebarArticle() {
     );
 }
 export function TopProductArticle() {
-    return <></>;
+    return (
+        <>
+            <div className="wrapper">
+                <Image src={images.nextImage} className="back-image" alt="" />
+                <div className="list">
+                    <div className="list-wrap">
+                        <div className="list-item"></div>
+                    </div>
+                </div>
+                <Image src={images.nextImage} className="next-image" alt="" />
+                <ul className="list-dot"></ul>
+            </div>
+        </>
+    );
 }

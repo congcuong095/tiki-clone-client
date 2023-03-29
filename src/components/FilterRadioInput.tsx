@@ -1,11 +1,13 @@
 import { selectData } from '@/pages/api/hello';
 import { useState } from 'react';
-import { checkedIcon, checkIcon, expandIcon, shortenIcon } from '../assets/svg/icon';
-import SelectInput from './SelectInput';
+import { expandIcon, shortenIcon } from '../assets/svg/icon';
+import RadioInput from './RadioInput';
 
-function FilterSelectInput({ ...props }) {
+function FilterRadioInput({ ...props }) {
     const data: selectData = props.data;
     const [display, setDisplay] = useState(false);
+    const [idCheck, setIdCheck] = useState(-1);
+    
     return (
         <>
             <div className="list px-[16px] pb-[12px] border-t border-solid border-[#ebebf0]">
@@ -17,20 +19,31 @@ function FilterSelectInput({ ...props }) {
                         if (index >= 5) {
                             return (
                                 <label
-                                    style={display ? { display: 'flex' } : { display: 'none' }}
                                     key={item.id}
-                                    className="list-item  flex items-center text-[13px] leading-[16px] capitalize mb-[12px] text-textPrimary"
+                                    className=" flex items-center text-[13px] leading-[16px] capitalize mb-[12px] text-textPrimary"
+                                    onClick={() => setIdCheck(item.id)}
                                 >
-                                    <SelectInput content={item.content} image={item.image} title={data.title} />
+                                    <RadioInput
+                                        content={item.content}
+                                        image={item.image}
+                                        id={item.id}
+                                        idCheck={idCheck}
+                                    />
                                 </label>
                             );
                         }
                         return (
                             <label
                                 key={item.id}
-                                className="list-item  flex items-center text-[13px] leading-[16px] capitalize mb-[12px] text-textPrimary"
+                                className=" flex items-center text-[13px] leading-[16px] capitalize mb-[12px] text-textPrimary"
+                                onClick={() => setIdCheck(item.id)}
                             >
-                                <SelectInput content={item.content} image={item.image} title={data.title} />
+                                <RadioInput
+                                    content={item.content}
+                                    image={item.image}
+                                    id={item.id}
+                                    idCheck={idCheck}
+                                />
                             </label>
                         );
                     })}
@@ -49,4 +62,4 @@ function FilterSelectInput({ ...props }) {
     );
 }
 
-export default FilterSelectInput;
+export default FilterRadioInput;

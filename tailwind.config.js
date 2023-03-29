@@ -18,5 +18,8 @@ module.exports = {
             textSecondary: 'rgb(var(--text-secondary-color) / <alpha-value>)',
         },
     },
-    plugins: [],
+    plugins: [
+        require('@tailwindcss/line-clamp'),
+        // ...
+    ],
 };

@@ -90,3 +90,11 @@ export const selectBrandData: selectData = {
         { id: 10, content: '11 bánh' },
     ],
 };
+
+export const selectShipData: selectData = {
+    title: 'Giao hàng',
+    list: [
+        { id: 1, content: 'Hàng nội địa' },
+        { id: 2, content: 'Hàng quốc tế' },
+    ],
+};

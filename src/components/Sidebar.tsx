@@ -1,10 +1,11 @@
-import { childListData, price, selectBrandData, selectColorData, servicesData } from '@/pages/api/hello';
+import { childListData, price, selectBrandData, selectColorData, selectShipData, servicesData } from '@/pages/api/hello';
 import {  goldStar, grayStar } from '../assets/svg/icon';
 
 
 import FilterSelectInput from './FilterSelectInput';
 import Button from './Button';
 import { UnderSidebarArticle } from './Article';
+import FilterRadioInput from './FilterRadioInput';
 
 function Sidebar() {
     const handlePrice = (price: number): string => {
@@ -141,7 +142,7 @@ function Sidebar() {
                             <input
                                 pattern="[0-9]*"
                                 placeholder="Giá từ"
-                                value="0"
+                                defaultValue="0"
                                 className="flex-1 w-[77px] h-[30px] px-[8px] bg-[#ffffff] rounded-[4px] text-left border border-solid border-[#b8b8b8] outline-none text-[13px]"
                             />
                             <span className="w-[7px] h-[1px] text-[0] inline-block bg-[#9a9a9a] mx-[4px] align-middle">
@@ -150,7 +151,7 @@ function Sidebar() {
                             <input
                                 pattern="[0-9]*"
                                 placeholder="Giá đến"
-                                value="0"
+                                defaultValue="0"
                                 className="flex-1 w-[77px] h-[30px] px-[8px] bg-[#ffffff] rounded-[4px] text-left border border-solid border-[#b8b8b8] outline-none text-[13px]"
                             />
                         </div>
@@ -163,6 +164,8 @@ function Sidebar() {
                 {selectColorData && <FilterSelectInput data={selectColorData} />}
                 {/* Thuong hieu */}
                 {selectBrandData && <FilterSelectInput data={selectBrandData} />}
+                {/* Giao hàng */}
+                {selectShipData && <FilterRadioInput data={selectShipData} />}
                 <UnderSidebarArticle />
             </div>
         </>

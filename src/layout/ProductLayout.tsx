@@ -33,7 +33,7 @@ function ProductLayout({ children }: any) {
                     </div>
                 </div>
                 <div className="container  w-[1270px] px-[15px] mx-[auto]">
-                    <div className="container-view flex justify-between items-center w-full">
+                    <div className="container-view flex justify-between items-start w-full">
                         <Sidebar />
                         {children}
                     </div>
