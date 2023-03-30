@@ -2,10 +2,10 @@ import Footer from '@/src/components/Footer';
 import Header from '@/src/components/Header';
 import Sidebar from '@/src/components/Sidebar';
 import { UnderHeaderArticle } from '../components/Article';
-import React from 'react';
+import React, { useContext } from 'react';
 import { nextIcon } from '../assets/svg/icon';
 
-function ProductLayout({ children, data, setData }: any) {
+function ProductLayout({ children }: any) {
     return (
         <>
             <Header />
@@ -34,7 +34,7 @@ function ProductLayout({ children, data, setData }: any) {
                 </div>
                 <div className="container  w-[1270px] px-[15px] mx-[auto]">
                     <div className="container-view flex justify-between items-start w-full">
-                        <Sidebar data={data} setData={setData} />
+                        <Sidebar />
                         {children}
                     </div>
                 </div>

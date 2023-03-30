@@ -1,12 +1,13 @@
 import { goldStar, grayStar } from '../assets/svg/icon';
 
 export const handlePrice = (price: number): string => {
-    let newPrice: string = '';
-    while (price % 1000 == 0) {
-        price = price / 1000;
-        newPrice += '.000';
-    }
-    return (newPrice = price + newPrice);
+    let str: string = String(price);
+    return str
+        .split('')
+        .reverse()
+        .reduce((prev, next, index) => {
+            return (index % 3 ? next : next + '.') + prev;
+        });
 };
 
 export const drawStarRating = (numb: string) => {
@@ -34,7 +35,7 @@ export const drawStarRating = (numb: string) => {
 interface propFilter {
     dataFil: any;
     field?: any;
-    RadioOnly?: any;
+    ChooseOnly?: any;
     _RangeMin?: any;
     _RangeMax?: any;
     SelectContain?: any;
@@ -43,16 +44,30 @@ interface propFilter {
 export const filterData = ({
     dataFil,
     field,
-    RadioOnly,
+    ChooseOnly,
     _RangeMin = dataFil.filters.find((item: any) => item.query_name == field).min,
     _RangeMax = dataFil.filters.find((item: any) => item.query_name == field).max,
     SelectContain,
 }: propFilter) => {
+    let dataConvert = dataFil;
     if (_RangeMax != undefined && _RangeMin != undefined) {
-        dataFil.data = dataFil['data'].filter((xItem: any) => xItem[field] >= _RangeMin && xItem[field] <= _RangeMax);
+        dataConvert.data = dataFil['data'].filter(
+            (xItem: any) => xItem[field] >= _RangeMin && xItem[field] <= _RangeMax,
+        );
 
-        console.log(dataFil);
-        return dataFil;
+        return dataConvert;
     }
-    return dataFil;
+    if (ChooseOnly != undefined) {
+        dataConvert.data = dataFil['data'].filter((xItem: any) => xItem[field].type == ChooseOnly);
+
+        return dataConvert;
+    }
+    if (SelectContain != undefined) {
+        dataConvert.data = dataFil['data'].filter((xItem: any) =>
+            xItem[field].some((y: any) => y.type == SelectContain),
+        );
+
+        return dataConvert;
+    }
+    return dataConvert;
 };

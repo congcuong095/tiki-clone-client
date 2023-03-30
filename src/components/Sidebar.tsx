@@ -1,14 +1,16 @@
 import { expandIcon, shortenIcon } from '../assets/svg/icon';
-
 import FilterSelectInput from './FilterSidebar/FilterSelectInput';
 import Button from './Button';
 import { UnderSidebarArticle } from './Article';
 import FilterRadioInput from './FilterSidebar/FilterRadioInput';
-import { drawStarRating, filterData, handlePrice } from '../Helper/Helper';
-import { useEffect, useState } from 'react';
+import { drawStarRating, filterData } from '../Helper/Helper';
+import { useContext, useEffect, useState } from 'react';
 import SelectInput from './FilterSidebar/SelectInput';
+import { DataContext } from '@/pages';
 
-function Sidebar({ data, setData }: any) {
+function Sidebar() {
+    const { data, setData } = useContext<any>(DataContext);
+
     const [displayService, setDisplayService] = useState(false);
     const dataFilters = data.filters;
     let category;
@@ -25,9 +27,6 @@ function Sidebar({ data, setData }: any) {
         arrSelect = dataFilters.filter((item: any) => item.multi_select == true);
         cross_border = dataFilters.find((item: any) => item.query_name == 'is_cross_border');
     }
-    const handleFilter = (value: any) => {
-        setData(value);
-    };
     return (
         <>
             <div className="wrapper bg-[#ffffff] w-[200px] rounded-l-[4px]  overflow-hidden">
@@ -144,8 +143,7 @@ function Sidebar({ data, setData }: any) {
                                         className="list-item cursor-pointer"
                                         key={item.query_value}
                                         onClick={(e) => {
-                                            e.preventDefault();
-                                            handleFilter(
+                                            setData(
                                                 filterData({
                                                     dataFil: data,
                                                     field: price.query_name,

@@ -1,16 +1,20 @@
-import React from 'react';
+import { DataContext } from '@/pages';
+import React, { useContext } from 'react';
 import { TopProductArticle } from './Article';
 import ProductItem from './ProductItem';
 
-function Product({ dataProp, setData }: any) {
+function Product() {
+    const { data, setData } = useContext<any>(DataContext);
+    console.log(data);
+
     return (
         <>
             <div className="wrapper rounded-r-[4px] w-[calc(100%-208px)]">
                 <div className="inner">
                     <div className="header">{/* <TopProductArticle/> */}</div>
                     <div className="main flex flex-wrap gap-[8px] bg-[transparent]">
-                        {dataProp &&
-                            dataProp.map((item: any) => {
+                        {data.data &&
+                            data['data'].map((item: any) => {
                                 return <ProductItem key={item.id} dataProduct={item} />;
                             })}
                     </div>
