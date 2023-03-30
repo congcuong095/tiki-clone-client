@@ -1,28 +1,34 @@
-import { checkedIcon, checkIcon } from '../assets/svg/icon';
 import Image from 'next/image';
-import { useState } from 'react';
-import images from '../assets/image';
+import { useEffect, useState } from 'react';
+import images from '../../assets/image';
 
-function SelectInput({ content, image , title}: any) {
+function RadioInput({ content, image, idCheck, id }: any) {
     const [check, setCheck] = useState(false);
-    
+    useEffect(() => {
+        if (idCheck == id) {
+            setCheck(true);
+        } else {
+            setCheck(false);
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [idCheck]);
     return (
         <label
-            className="list-item-container mr-[2px] w-full items-start flex justify-start items-center cursor-pointer"
+            className="list-item-container mr-[2px] w-full items-start flex justify-start cursor-pointer"
             onClick={(e) => {
                 e.preventDefault();
-                setCheck(!check);
+                setCheck(true);
             }}
         >
-            <input type="checkbox" className="hidden" defaultValue=''/>
+            <input type="radio" className="hidden" />
             <span className="list-item-box mr-[12px] inline-block">
                 {check ? (
                     <div className="w-[16px] ">
-                        {title == 'Giao hàng' ? <Image src={images.radioCheckedIcon} alt="" /> : checkedIcon}
+                        <Image src={images.radioCheckedIcon} alt="" />
                     </div>
                 ) : (
                     <div className="w-[16px] ">
-                        {title == 'Giao hàng' ? <Image src={images.radioIcon} alt="" /> : checkIcon}
+                        <Image src={images.radioIcon} alt="" />
                     </div>
                 )}
             </span>
@@ -34,4 +40,4 @@ function SelectInput({ content, image , title}: any) {
     );
 }
 
-export default SelectInput;
+export default RadioInput;

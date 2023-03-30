@@ -8,7 +8,6 @@ export default function Home() {
     const getData = () =>
         getAPI().then((res) => {
             if (res.status === 200) {
-                console.log(res.data);
                 setData(res.data);
             } else {
                 console.log(res);
@@ -19,8 +18,8 @@ export default function Home() {
     }, []);
     return (
         <>
-            <ProductLayout data={data.filters}>
-                <Product />
+            <ProductLayout data={data} setData={setData}>
+                <Product dataProp={data.data} setData={setData} />
             </ProductLayout>
         </>
     );

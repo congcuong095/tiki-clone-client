@@ -1,29 +1,33 @@
-import {
-    childListData,
-    price,
-    selectBrandData,
-    selectColorData,
-    selectShipData,
-    servicesData,
-} from '@/pages/api/hello';
-import { goldStar, grayStar } from '../assets/svg/icon';
+import { expandIcon, shortenIcon } from '../assets/svg/icon';
 
-import FilterSelectInput from './FilterSelectInput';
+import FilterSelectInput from './FilterSidebar/FilterSelectInput';
 import Button from './Button';
 import { UnderSidebarArticle } from './Article';
-import FilterRadioInput from './FilterRadioInput';
+import FilterRadioInput from './FilterSidebar/FilterRadioInput';
+import { drawStarRating, filterData, handlePrice } from '../Helper/Helper';
+import { useEffect, useState } from 'react';
+import SelectInput from './FilterSidebar/SelectInput';
 
-function Sidebar({ data }: any) {
-    const handlePrice = (price: number): string => {
-        let newPrice: string = '';
-        while (price % 1000 == 0) {
-            price = price / 1000;
-            newPrice += '.000';
-        }
-        return (newPrice = price + newPrice);
+function Sidebar({ data, setData }: any) {
+    const [displayService, setDisplayService] = useState(false);
+    const dataFilters = data.filters;
+    let category;
+    let service;
+    let rating;
+    let price: any;
+    let arrSelect;
+    let cross_border;
+    if (dataFilters != undefined) {
+        category = dataFilters.find((item: any) => item.query_name == 'category');
+        service = dataFilters.filter((item: any) => item.type == 'service');
+        rating = dataFilters.find((item: any) => item.query_name == 'rating');
+        price = dataFilters.find((item: any) => item.query_name == 'price');
+        arrSelect = dataFilters.filter((item: any) => item.multi_select == true);
+        cross_border = dataFilters.find((item: any) => item.query_name == 'is_cross_border');
+    }
+    const handleFilter = (value: any) => {
+        setData(value);
     };
-
-    const category = data != undefined && data.find((item: any) => item.query_name == 'category');
     return (
         <>
             <div className="wrapper bg-[#ffffff] w-[200px] rounded-l-[4px]  overflow-hidden">
@@ -38,7 +42,7 @@ function Sidebar({ data }: any) {
                                     <a
                                         href={`${item.url_path}`}
                                         key={item.query_value}
-                                        className="list-item text-[13px] pl-0 font-normal text-textPrimary pb-[12px] leading-[16px] flex items-center"
+                                        className="text-[13px] pl-0 font-normal text-textPrimary pb-[12px] leading-[16px] flex items-center"
                                     >
                                         {item.display_value}
                                     </a>
@@ -60,120 +64,141 @@ function Sidebar({ data }: any) {
                     </div>
                 </div>
                 {/* Dich vu */}
-                {servicesData && <FilterSelectInput data={servicesData} />}
+                {service && (
+                    <div className="list px-[16px] pb-[12px] border-t border-solid border-[#ebebf0]">
+                        <h4 className="list-title m-0 leading-[20px] block text-textPrimary text-[14px] py-[12px] font-medium">
+                            Dịch vụ
+                        </h4>
+                        <div className="list-main list-none">
+                            {service.map((item: any, index: number) => {
+                                if (index >= 5) {
+                                    return (
+                                        <label
+                                            style={displayService ? { display: 'flex' } : { display: 'none' }}
+                                            key={item.query_name}
+                                            className="flex items-center text-[13px] leading-[16px] capitalize mb-[12px] text-textPrimary"
+                                        >
+                                            <SelectInput content={item.display_name} image={item.icon} />
+                                        </label>
+                                    );
+                                }
+                                return (
+                                    <label
+                                        key={item.query_name}
+                                        className="flex items-center text-[13px] leading-[16px] capitalize mb-[12px] text-textPrimary"
+                                    >
+                                        <SelectInput content={item.display_name} image={item.icon} />
+                                    </label>
+                                );
+                            })}
+                        </div>
+                        {service.length > 5 && (
+                            <div
+                                className="toggle text-[13px] font-medium flex items-center leading-[16px] text-primaryColor cursor-pointer"
+                                onClick={() => setDisplayService(!displayService)}
+                            >
+                                {displayService ? 'Thu gọn' : 'Xem thêm'}
+                                {displayService ? shortenIcon : expandIcon}
+                            </div>
+                        )}
+                    </div>
+                )}
                 {/* Đánh giá */}
-                <div className="list px-[16px] pb-[12px] border-t border-solid border-[#ebebf0]">
-                    <h4 className="list-title m-0 leading-[20px] block text-textPrimary text-[14px] py-[12px] font-medium">
-                        Đánh giá
-                    </h4>
-                    <div className="rating-list">
-                        <div className="rating-item  flex py-[5px] items-center">
-                            <p className="rating-star text-[12px] flex items-center m-0">
-                                {goldStar}
-                                {goldStar}
-                                {goldStar}
-                                {goldStar}
-                                {goldStar}
-                            </p>
-                            <span className="rating-content ml-[3px] text-[14px] font-normal text-[#242424]">
-                                từ 5 sao
-                            </span>
-                        </div>
-                        <div className="rating-item  flex py-[5px] items-center">
-                            <p className="rating-star text-[12px] flex items-center m-0">
-                                {goldStar}
-                                {goldStar}
-                                {goldStar}
-                                {goldStar}
-                                {grayStar}
-                            </p>
-                            <span className="rating-content ml-[3px] text-[14px] font-normal text-[#242424]">
-                                từ 4 sao
-                            </span>
-                        </div>
-                        <div className="rating-item  flex py-[5px] items-center">
-                            <p className="rating-star text-[12px] flex items-center m-0">
-                                {goldStar}
-                                {goldStar}
-                                {goldStar}
-                                {grayStar}
-                                {grayStar}
-                            </p>
-                            <span className="rating-content ml-[3px] text-[14px] font-normal text-[#242424]">
-                                từ 3 sao
-                            </span>
+                {rating && (
+                    <div className="list px-[16px] pb-[12px] border-t border-solid border-[#ebebf0]">
+                        <h4 className="list-title m-0 leading-[20px] block text-textPrimary text-[14px] py-[12px] font-medium">
+                            {rating.display_name}
+                        </h4>
+                        <div className="rating-list">
+                            {rating.values.map((item: any) => {
+                                return (
+                                    <div
+                                        key={item.query_value}
+                                        className="rating-item  flex py-[5px] items-center cursor-pointer"
+                                    >
+                                        {drawStarRating(item.query_value)}
+
+                                        <span className="rating-content ml-[3px] text-[14px] font-normal text-[#242424]">
+                                            {item.display_value}
+                                        </span>
+                                    </div>
+                                );
+                            })}
                         </div>
                     </div>
-                </div>
+                )}
 
                 {/* Giá */}
-                <div className="list px-[16px] pb-[12px] border-t border-solid border-[#ebebf0] cursor-pointer">
-                    <h4 className="list-title m-0 leading-[20px] block text-textPrimary text-[14px] py-[12px] font-medium">
-                        Giá
-                    </h4>
-                    <div className="list-main list-none">
-                        {price.map((item, index) => {
-                            if (item == price[0]) {
+                {price && (
+                    <div className="list px-[16px] pb-[12px] border-t border-solid border-[#ebebf0] cursor-pointer">
+                        <h4 className="list-title m-0 leading-[20px] block text-textPrimary text-[14px] py-[12px] font-medium">
+                            {price.display_name + ' (Ko send API)'}
+                        </h4>
+                        <div className="list-main list-none">
+                            {price.values.map((item: any) => {
+                                let maxPrice = item['query_value'].split(',')[1];
+                                let minPrice = item['query_value'].split(',')[0];
+
                                 return (
-                                    <div className="list-item cursor-pointer" key={item}>
+                                    <div
+                                        className="list-item cursor-pointer"
+                                        key={item.query_value}
+                                        onClick={(e) => {
+                                            e.preventDefault();
+                                            handleFilter(
+                                                filterData({
+                                                    dataFil: data,
+                                                    field: price.query_name,
+                                                    _RangeMax: maxPrice,
+                                                    _RangeMin: minPrice,
+                                                }),
+                                            );
+                                        }}
+                                    >
                                         <span className="bg-[#eeeeee] px-[12px] py-[4px] leading-[16px] inline-block relative text-textPrimary rounded-[12px] mb-[4px] text-[13px]">
-                                            Dưới {handlePrice(item)}
+                                            {item.display_value}
                                         </span>
                                     </div>
                                 );
-                            }
-
-                            if (item == price[price.length - 1]) {
-                                return (
-                                    <div className="list-item cursor-pointer" key={item}>
-                                        <span className="bg-[#eeeeee] px-[12px] py-[4px] leading-[16px] inline-block relative text-textPrimary rounded-[12px] mb-[4px] text-[13px]">
-                                            Trên {handlePrice(item)}
-                                        </span>
-                                    </div>
-                                );
-                            }
-
-                            return (
-                                <div className="list-item cursor-pointer" key={item}>
-                                    <span className="bg-[#eeeeee] px-[12px] py-[4px] leading-[16px] inline-block relative text-textPrimary rounded-[12px] mb-[4px] text-[13px]">
-                                        {handlePrice(item)} -&gt; {handlePrice(price[index + 1])}{' '}
-                                    </span>
-                                </div>
-                            );
-                        })}
-                    </div>
-                    <div className="price-range">
-                        <div className="price-range-title text-textPrimary text-[13px] pb-[8px] mt-4px]">
-                            Chọn khoảng giá
+                            })}
                         </div>
-                        <div className="price-range-input flex items-center">
-                            <input
-                                pattern="[0-9]*"
-                                placeholder="Giá từ"
-                                defaultValue="0"
-                                className="flex-1 w-[77px] h-[30px] px-[8px] bg-[#ffffff] rounded-[4px] text-left border border-solid border-[#b8b8b8] outline-none text-[13px]"
-                            />
-                            <span className="w-[7px] h-[1px] text-[0] inline-block bg-[#9a9a9a] mx-[4px] align-middle">
-                                -
-                            </span>
-                            <input
-                                pattern="[0-9]*"
-                                placeholder="Giá đến"
-                                defaultValue="0"
-                                className="flex-1 w-[77px] h-[30px] px-[8px] bg-[#ffffff] rounded-[4px] text-left border border-solid border-[#b8b8b8] outline-none text-[13px]"
-                            />
+                        <div className="price-range">
+                            <div className="price-range-title text-textPrimary text-[13px] pb-[8px] mt-4px]">
+                                Chọn khoảng giá
+                            </div>
+                            <div className="price-range-input flex items-center">
+                                <input
+                                    pattern="[0-9]*"
+                                    placeholder="Giá từ"
+                                    defaultValue="0"
+                                    className="flex-1 w-[77px] h-[30px] px-[8px] bg-[#ffffff] rounded-[4px] text-left border border-solid border-[#b8b8b8] outline-none text-[13px]"
+                                />
+                                <span className="w-[7px] h-[1px] text-[0] inline-block bg-[#9a9a9a] mx-[4px] align-middle">
+                                    -
+                                </span>
+                                <input
+                                    pattern="[0-9]*"
+                                    placeholder="Giá đến"
+                                    defaultValue="0"
+                                    className="flex-1 w-[77px] h-[30px] px-[8px] bg-[#ffffff] rounded-[4px] text-left border border-solid border-[#b8b8b8] outline-none text-[13px]"
+                                />
+                            </div>
+                            <Button className="price-range-title border-[1px] border-solid border-primaryColor px-[15px] py-[5px] w-full mt-[8px]  text-[13px] h-auto leading-none rounded-[8px]">
+                                Áp dụng
+                            </Button>
                         </div>
-                        <Button className="price-range-title border-[1px] border-solid border-primaryColor px-[15px] py-[5px] w-full mt-[8px]  text-[13px] h-auto leading-none rounded-[8px]">
-                            Áp dụng
-                        </Button>
                     </div>
-                </div>
-                {/* Mau sac */}
-                {selectColorData && <FilterSelectInput data={selectColorData} />}
-                {/* Thuong hieu */}
-                {selectBrandData && <FilterSelectInput data={selectBrandData} />}
-                {/* Giao hàng */}
-                {selectShipData && <FilterRadioInput data={selectShipData} />}
+                )}
+                {/* Select */}
+                {arrSelect &&
+                    arrSelect.map((item: any, index: any) => {
+                        return (
+                            <div key={index}>
+                                <FilterSelectInput data={item} />
+                            </div>
+                        );
+                    })}
+                {cross_border && <FilterRadioInput data={cross_border} />}
                 <UnderSidebarArticle />
             </div>
         </>
