@@ -1,9 +1,35 @@
-import { useState } from 'react';
-import { checkedIcon, checkIcon, expandIcon, shortenIcon } from '../../assets/svg/icon';
+import { useContext, useEffect, useState } from 'react';
+import { expandIcon, shortenIcon } from '../../../assets/svg/icon';
 import SelectInput from './SelectInput';
+import { DataContext } from '@/pages';
 
 function FilterSelectInput({ data }: any) {
     const [display, setDisplay] = useState(false);
+    const { param, setParam } = useContext<any>(DataContext);
+    const [categorySelect, setCategorySelect] = useState<any>();
+    const newParam = { ...param };
+
+    const handleFilter = (select: boolean, query_value: any) => {
+        if (categorySelect == undefined) {
+            setCategorySelect([query_value]);
+        } else {
+            if (!select) {
+                setCategorySelect((prev: any) => [...prev, query_value]);
+            } else {
+                setCategorySelect(categorySelect.filter((x: any) => x != query_value));
+            }
+        }
+    };
+
+    useEffect(() => {
+        if (categorySelect == undefined || categorySelect.length == 0) {
+            delete newParam['param'][data.query_name];
+        } else {
+            newParam['param'][data.query_name] = categorySelect.join();
+        }
+        setParam(newParam);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [categorySelect]);
 
     return (
         <>
@@ -19,8 +45,13 @@ function FilterSelectInput({ data }: any) {
                                     style={display ? { display: 'flex' } : { display: 'none' }}
                                     key={item.query_value}
                                     className=" flex items-center text-[13px] leading-[16px] capitalize mb-[12px] text-textPrimary"
+                                    onClick={() => handleFilter(item.selected, item.query_value)}
                                 >
-                                    <SelectInput content={item.display_value} image={item.image} />
+                                    <SelectInput
+                                        content={item.display_value}
+                                        image={item.image}
+                                        selected={item.selected}
+                                    />
                                 </label>
                             );
                         }
@@ -28,6 +59,7 @@ function FilterSelectInput({ data }: any) {
                             <label
                                 key={item.query_value}
                                 className=" flex items-center text-[13px] leading-[16px] capitalize mb-[12px] text-textPrimary"
+                                onClick={() => handleFilter(item.selected, item.query_value)}
                             >
                                 <SelectInput content={item.display_value} image={item.image} />
                             </label>

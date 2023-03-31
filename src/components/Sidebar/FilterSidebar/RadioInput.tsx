@@ -1,9 +1,9 @@
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import images from '../../assets/image';
+import images from '../../../assets/image';
 
-function RadioInput({ content, image, idCheck, id }: any) {
-    const [check, setCheck] = useState(false);
+function RadioInput({ content, image, idCheck, id, checkRadio }: any) {
+    const [check, setCheck] = useState(checkRadio);
     useEffect(() => {
         if (idCheck == id) {
             setCheck(true);

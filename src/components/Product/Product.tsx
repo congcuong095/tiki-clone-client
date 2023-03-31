@@ -1,6 +1,6 @@
 import { DataContext } from '@/pages';
 import React, { useContext } from 'react';
-import { TopProductArticle } from './Article';
+import { TopProductArticle } from '../Article';
 import ProductItem from './ProductItem';
 
 function Product() {

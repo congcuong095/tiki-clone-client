@@ -12,9 +12,6 @@ export interface Params {
         trackity_id?: any;
         urlKey?: any;
         brand?: any;
-        support_p2h_delivery?: any;
-        seller_asa_cashback?: any;
-        support_installment?: any;
     };
 }
 

@@ -1,10 +1,22 @@
-import { useState } from 'react';
-import { expandIcon, shortenIcon } from '../../assets/svg/icon';
+import { useContext, useEffect, useState } from 'react';
+import { expandIcon, shortenIcon } from '../../../assets/svg/icon';
 import RadioInput from './RadioInput';
+import { DataContext } from '@/pages';
 
 function FilterRadioInput({ data }: any) {
     const [display, setDisplay] = useState(false);
     const [idCheck, setIdCheck] = useState(-1);
+    const { param, setParam } = useContext<any>(DataContext);
+    const newParam = { ...param };
+
+    const handleFilter = (select: boolean, query_value: any) => {
+        if (select) {
+            delete newParam['param'][data.query_name];
+        } else {
+            newParam['param'][data.query_name] = query_value;
+        }
+        setParam(newParam);
+    };
 
     return (
         <>
@@ -19,13 +31,17 @@ function FilterRadioInput({ data }: any) {
                                 <label
                                     key={item.query_value}
                                     className=" flex items-center text-[13px] leading-[16px] capitalize mb-[12px] text-textPrimary"
-                                    onClick={() => setIdCheck(item.query_value)}
+                                    onClick={() => {
+                                        handleFilter(item.selected, item.query_value);
+                                        setIdCheck(item.query_value);
+                                    }}
                                 >
                                     <RadioInput
                                         content={item.display_value}
                                         image={item.image}
                                         id={item.query_value}
                                         idCheck={idCheck}
+                                        checkRadio={item.selected}
                                     />
                                 </label>
                             );
@@ -34,13 +50,17 @@ function FilterRadioInput({ data }: any) {
                             <label
                                 key={item.query_value}
                                 className=" flex items-center text-[13px] leading-[16px] capitalize mb-[12px] text-textPrimary"
-                                onClick={() => setIdCheck(item.query_value)}
+                                onClick={() => {
+                                    handleFilter(item.selected, item.query_value);
+                                    setIdCheck(item.query_value);
+                                }}
                             >
                                 <RadioInput
                                     content={item.display_value}
                                     image={item.image}
                                     id={item.query_value}
                                     idCheck={idCheck}
+                                    check={item.selected}
                                 />
                             </label>
                         );

@@ -1,4 +1,4 @@
-import Product from '@/src/components/Product';
+import Product from '@/src/components/Product/Product';
 import ProductLayout from '@/src/layout/ProductLayout';
 import { createContext, useEffect, useState } from 'react';
 import { getData, Params } from './api/axios';
@@ -16,9 +16,6 @@ const initParam: Params = {
         page: 1,
         trackity_id: 'c6f19eee-d118-ea27-ead1-840849028e16',
         urlKey: 'o-to-xe-may-xe-dap',
-        // support_p2h_delivery: undefined,
-        // seller_asa_cashback: undefined,
-        // support_installment: undefined,
     },
 };
 
