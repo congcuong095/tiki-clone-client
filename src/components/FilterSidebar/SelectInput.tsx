@@ -1,6 +1,6 @@
 import { checkedIcon, checkIcon } from '../../assets/svg/icon';
 import Image from 'next/image';
-import {  useState } from 'react';
+import { useState } from 'react';
 
 function SelectInput({ content, image }: any) {
     const [check, setCheck] = useState(false);

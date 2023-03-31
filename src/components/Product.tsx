@@ -4,8 +4,7 @@ import { TopProductArticle } from './Article';
 import ProductItem from './ProductItem';
 
 function Product() {
-    const { data, setData } = useContext<any>(DataContext);
-    console.log(data);
+    const { dataProduct } = useContext<any>(DataContext);
 
     return (
         <>
@@ -13,9 +12,11 @@ function Product() {
                 <div className="inner">
                     <div className="header">{/* <TopProductArticle/> */}</div>
                     <div className="main flex flex-wrap gap-[8px] bg-[transparent]">
-                        {data.data &&
-                            data['data'].map((item: any) => {
-                                return <ProductItem key={item.id} dataProduct={item} />;
+                        {dataProduct.data &&
+                            dataProduct['data'].map((item: any, index: any) => {
+                                if (index < 40) {
+                                    return <ProductItem key={`${item.id + index}`} dataProduct={item} />;
+                                }
                             })}
                     </div>
                     <div className="pagination"></div>

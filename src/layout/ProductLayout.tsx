@@ -2,7 +2,7 @@ import Footer from '@/src/components/Footer';
 import Header from '@/src/components/Header';
 import Sidebar from '@/src/components/Sidebar';
 import { UnderHeaderArticle } from '../components/Article';
-import React, { useContext } from 'react';
+import React from 'react';
 import { nextIcon } from '../assets/svg/icon';
 
 function ProductLayout({ children }: any) {

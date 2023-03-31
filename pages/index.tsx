@@ -1,27 +1,23 @@
 import Product from '@/src/components/Product';
 import ProductLayout from '@/src/layout/ProductLayout';
-import React from 'react';
-import { createContext, useEffect, useState } from 'react';
-import { getAPI } from './api/axios';
+import { createContext, useCallback, useEffect, useState } from 'react';
+import { getAPI, getData } from './api/axios';
 
 export const DataContext = createContext({});
 
 export default function Home() {
-    const [data, setData] = useState<any>({});
-    const getData = () =>
-        getAPI().then((res) => {
-            if (res.status === 200) {
-                setData(res.data);
-            } else {
-                console.log(res);
-            }
-        });
+    const [dataRoot, setDataRoot] = useState<any>({});
+    const [dataProduct, setDataProduct] = useState<any>({});
+
     useEffect(() => {
-        getData();
+        getData().then((res) => {
+            setDataRoot(res);
+            setDataProduct(res);
+        });
     }, []);
 
     return (
-        <DataContext.Provider value={{ data, setData }}>
+        <DataContext.Provider value={{ dataRoot, setDataProduct, dataProduct }}>
             <ProductLayout>
                 <Product />
             </ProductLayout>

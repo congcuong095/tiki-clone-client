@@ -1,13 +1,7 @@
 import { goldStar, grayStar } from '../assets/svg/icon';
 
 export const handlePrice = (price: number): string => {
-    let str: string = String(price);
-    return str
-        .split('')
-        .reverse()
-        .reduce((prev, next, index) => {
-            return (index % 3 ? next : next + '.') + prev;
-        });
+    return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
 };
 
 export const drawStarRating = (numb: string) => {
@@ -36,8 +30,8 @@ interface propFilter {
     dataFil: any;
     field?: any;
     ChooseOnly?: any;
-    _RangeMin?: any;
-    _RangeMax?: any;
+    _RangeMin?: number;
+    _RangeMax?: number;
     SelectContain?: any;
 }
 
@@ -49,12 +43,11 @@ export const filterData = ({
     _RangeMax = dataFil.filters.find((item: any) => item.query_name == field).max,
     SelectContain,
 }: propFilter) => {
-    let dataConvert = dataFil;
+    let dataConvert = { ...dataFil };
     if (_RangeMax != undefined && _RangeMin != undefined) {
         dataConvert.data = dataFil['data'].filter(
             (xItem: any) => xItem[field] >= _RangeMin && xItem[field] <= _RangeMax,
         );
-
         return dataConvert;
     }
     if (ChooseOnly != undefined) {
