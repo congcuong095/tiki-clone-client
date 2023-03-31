@@ -7,10 +7,10 @@ import { drawStarRating, filterData, handlePrice } from '../Helper/Helper';
 import { useContext, useRef, useState } from 'react';
 import SelectInput from './FilterSidebar/SelectInput';
 import { DataContext } from '@/pages';
-import { isNumberObject } from 'util/types';
 
 function Sidebar() {
-    const { dataRoot, setDataProduct } = useContext<any>(DataContext);
+    const { dataRoot, setDataProduct, param, setParam } = useContext<any>(DataContext);
+    const newParam = { ...param };
     const [displayService, setDisplayService] = useState(false);
     const [priceFrom, setPriceFrom] = useState('0');
     const [priceIndex, setPriceIndex] = useState(-1);
@@ -81,6 +81,33 @@ function Sidebar() {
             }
         }
     };
+
+    const handlePriceRange = () => {
+        priceRef.current?.querySelectorAll('span').forEach((item) => {
+            item.style.color = 'var(--text-primary-color)';
+            item.style.backgroundColor = 'rgb(238 ,238 ,238)';
+            item.style.border = 'none';
+        });
+        setDataProduct(
+            filterData({
+                dataFil: dataRoot,
+                field: price.query_name,
+                _RangeMin: Number(priceFrom.split('.').join('')),
+                _RangeMax: Number(priceTo.split('.').join('')),
+            }),
+        );
+    };
+
+    const handleService = (value: any, select: boolean) => {
+        if (select) {
+            delete newParam['param'][value];
+        } else {
+            newParam['param'][value] = 1;
+        }
+        console.log(newParam);
+        setParam(newParam);
+    };
+
     return (
         <>
             <div className="wrapper bg-[#ffffff] w-[200px] rounded-l-[4px]  overflow-hidden">
@@ -130,6 +157,7 @@ function Sidebar() {
                                             style={displayService ? { display: 'flex' } : { display: 'none' }}
                                             key={item.query_name}
                                             className="flex items-center text-[13px] leading-[16px] capitalize mb-[12px] text-textPrimary"
+                                            onClick={() => handleService(item.query_name, item.values[0].selected)}
                                         >
                                             <SelectInput content={item.display_name} image={item.icon} />
                                         </label>
@@ -139,6 +167,7 @@ function Sidebar() {
                                     <label
                                         key={item.query_name}
                                         className="flex items-center text-[13px] leading-[16px] capitalize mb-[12px] text-textPrimary"
+                                        onClick={() => handleService(item.query_name, item.values[0].selected)}
                                     >
                                         <SelectInput content={item.display_name} image={item.icon} />
                                     </label>
@@ -239,15 +268,8 @@ function Sidebar() {
                             </div>
                             <Button
                                 className="price-range-title border-[1px] border-solid border-primaryColor px-[15px] py-[5px] w-full mt-[8px]  text-[13px] h-auto leading-none rounded-[8px] cursor-pointer"
-                                onClick={(e: any) => {
-                                    setDataProduct(
-                                        filterData({
-                                            dataFil: dataRoot,
-                                            field: price.query_name,
-                                            _RangeMin: Number(priceFrom.split('.').join('')),
-                                            _RangeMax: Number(priceTo.split('.').join('')),
-                                        }),
-                                    );
+                                onClick={() => {
+                                    handlePriceRange();
                                 }}
                             >
                                 Áp dụng

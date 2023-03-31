@@ -1,19 +1,28 @@
 import axios from 'axios';
 
-interface Params {
+export interface Params {
     baseUrl: string;
     method: string;
+    param: {
+        limit?: any;
+        include?: any;
+        aggregations?: any;
+        category?: any;
+        page?: any;
+        trackity_id?: any;
+        urlKey?: any;
+        brand?: any;
+        support_p2h_delivery?: any;
+        seller_asa_cashback?: any;
+        support_installment?: any;
+    };
 }
-const getConfig: Params = {
-    baseUrl:
-        'https://tiki.vn/api/personalish/v1/blocks/listings?limit=100&include=advertisement&aggregations=2&trackity_id=6fa0b8cb-cce6-2d8f-d1e3-145d2d7afc48&category=8594&page=1&urlKey=o-to-xe-may-xe-dap',
-    method: 'get',
-};
 
-export const getAPI = async (): Promise<any> => {
+export const getAPI = async (param: any): Promise<any> => {
     return await axios({
-        ...getConfig,
-        url: `${getConfig.baseUrl}`,
+        ...param,
+        url: `${param.baseUrl}`,
+        params: param.param,
     })
         .then((response) => {
             return {
@@ -30,24 +39,14 @@ export const getAPI = async (): Promise<any> => {
         });
 };
 
-export async function getData() {
-    // let data: any;
-    // const res = await getAPI();
-    // if (res.status === 200) {
-    //     data = await res.data;
-    // } else {
-    //     console.log(res);
-    // }
-    const res = await getAPI();
+export async function getData(param: any) {
+    const res = await getAPI(param);
     const data = await res.data;
     return data;
 }
 
-export async function getStaticProps() {
-    // Instead of fetching your `/api` route you can call the same
-    // function directly in `getStaticProps`
-    const data = await getData();
+// export async function getStaticProps() {
+//     const data = await getData();
 
-    // Props returned will be passed to the page component
-    return { props: { data } };
-}
+//     return { props: { data } };
+// }
