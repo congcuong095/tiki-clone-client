@@ -1,0 +1,12 @@
+const actionType = Object.freeze({
+    //data
+    FETCH_PRODUCTS_PENDING: 'FETCH_PRODUCTS_PENDING',
+    FETCH_PRODUCTS_SUCCESS: 'FETCH_PRODUCTS_SUCCESS',
+    FETCH_PRODUCTS_ERROR: 'FETCH_PRODUCTS_ERROR',
+
+    //query param
+    UPDATE_PARAM: 'UPDATE_PARAM',
+    REMOVE_PARAM: 'REMOVE_PARAM',
+});
+
+export default actionType;
