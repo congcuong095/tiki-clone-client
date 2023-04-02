@@ -11,6 +11,7 @@ const nextConfig = {
             },
         ],
         minimumCacheTTL: 15000000,
+        unoptimized: true,
     },
     compiler: {
         // Enables the styled-components SWC transform
