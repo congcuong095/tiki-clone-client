@@ -13,3 +13,9 @@ export const RemoveParam = (remove: any) => {
         payload: remove,
     };
 };
+
+export const ResetParam = () => {
+    return {
+        type: actionType.RESET_PARAM,
+    };
+};

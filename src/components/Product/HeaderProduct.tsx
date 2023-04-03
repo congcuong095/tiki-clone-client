@@ -1,5 +1,5 @@
 import { DataContext } from '@/pages';
-import { RemoveParam, UpdateParam } from '@/src/Store/Actions';
+import { RemoveParam, ResetParam, UpdateParam } from '@/src/Store/Actions';
 import images from '@/src/assets/image';
 import Image from 'next/image';
 import { useContext } from 'react';
@@ -30,6 +30,7 @@ function HeaderProduct() {
         dispatch(
             UpdateParam({
                 sort: query_value,
+                page: 1,
             }),
         );
     };
@@ -63,32 +64,44 @@ function HeaderProduct() {
     };
 
     const handleSortBottom = () => {
-        let arr = [];
-        dataFilter.forEach((item: any) => {
-            if (item.selected) {
-                arr.push(
-                    <p
-                        key={item.query_name}
-                        className="filter-bottom-item bg-[#dbeeff] border border-solid border-[#1a94ff] cursor-pointer text-[#1a94ff] text-[13px] px-[12px] py-[10px] leading-[20px] relative rounded-[100px] flex mr-[10px] mb-0 h-[32px] items-center"
-                    >
-                        {item.query_name}
-                    </p>,
-                );
-            } else {
-                item.values.forEach((x: any) => {
-                    if (x.selected) {
-                        arr.push(
-                            <p
-                                key={item.display_value}
-                                className="filter-bottom-item bg-[#dbeeff] border border-solid border-[#1a94ff] cursor-pointer text-[#1a94ff] text-[13px] px-[12px] py-[10px] leading-[20px] relative rounded-[100px] flex mr-[10px] mb-0 h-[32px] items-center"
-                            >
-                                {item.display_value}
-                            </p>,
-                        );
-                    }
-                });
-            }
-        });
+        let arr: JSX.Element[] = [];
+        dataFilter &&
+            dataFilter.forEach((item: any) => {
+                if (item.query_name == 'support_installment') {
+                    item.values.forEach((x: any) => {
+                        if (x.selected) {
+                            const li = (
+                                <p
+                                    key={item.display_name}
+                                    className="filter-bottom-item bg-[#dbeeff] border border-solid border-[#1a94ff] cursor-pointer text-[#1a94ff] text-[13px] px-[12px] py-[10px] leading-[20px] relative rounded-[100px] flex mr-[10px] mb-0 h-[32px] items-center"
+                                >
+                                    {item.display_name}
+                                </p>
+                            );
+                            arr.push(li);
+                        }
+                    });
+                } else {
+                    item.values.forEach((x: any) => {
+                        if (x.selected) {
+                            const li = (
+                                <p
+                                    key={x.display_value}
+                                    className="filter-bottom-item bg-[#dbeeff] border border-solid border-[#1a94ff] cursor-pointer text-[#1a94ff] text-[13px] px-[12px] py-[10px] leading-[20px] relative rounded-[100px] flex mr-[10px] mb-0 h-[32px] items-center"
+                                >
+                                    {x.display_value}
+                                </p>
+                            );
+                            arr.push(li);
+                        }
+                    });
+                }
+            });
+        return arr;
+    };
+
+    const handleResetSort = () => {
+        dispatch(ResetParam());
     };
     return (
         <>
@@ -222,12 +235,20 @@ function HeaderProduct() {
                                 );
                             })}
 
-                        {handleSortBottom()}
-                        <p className="filter-bottom-item bg-[#ffffff] border border-solid border-[transparent] cursor-pointer text-[#1a94ff] text-[13px] px-[12px] py-[10px] leading-[20px] relative rounded-[100px] flex mr-[10px] mb-0 h-[32px] items-center font-medium">
-                            <a href="./" className=" text-[#1a94ff] flex">
-                                Xóa tất cả
-                            </a>
-                        </p>
+                        {handleSortBottom().map((item: any, index: any) => {
+                            return <div key={index}>{item}</div>;
+                        })}
+                        {((handleSortBottom() && handleSortBottom().length > 0) ||
+                            (dataService && dataService.some((x: any) => x.values[0].selected == true))) && (
+                            <p
+                                onClick={() => handleResetSort()}
+                                className="filter-bottom-item bg-[#ffffff] border border-solid border-[transparent] cursor-pointer text-[#1a94ff] text-[13px] px-[12px] py-[10px] leading-[20px] relative rounded-[100px] flex mr-[10px] mb-0 h-[32px] items-center font-medium"
+                            >
+                                <a href="./" className=" text-[#1a94ff] flex">
+                                    Xóa tất cả
+                                </a>
+                            </p>
+                        )}
                     </div>
                 </div>
             </div>

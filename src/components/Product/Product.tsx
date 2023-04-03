@@ -18,7 +18,7 @@ function Product() {
                     <div className="main flex flex-wrap gap-[8px] bg-[transparent]">
                         {dataProduct.data && dataProduct.data.length > 0 ? (
                             dataProduct.data.map((item: any, index: any) => {
-                                return <ProductItem key={`${item.id + index}`} dataProduct={item} />;
+                                return <ProductItem key={`${item.id}${index}`} dataProduct={item} />;
                             })
                         ) : (
                             <>

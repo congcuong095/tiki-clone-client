@@ -21,6 +21,8 @@ export default function ParamReducer(state = initState, action: any) {
             return {
                 ...state,
             };
+        case actionType.RESET_PARAM:
+            return initState;
 
         default:
             return state;

@@ -7,6 +7,7 @@ const actionType = Object.freeze({
     //query param
     UPDATE_PARAM: 'UPDATE_PARAM',
     REMOVE_PARAM: 'REMOVE_PARAM',
+    RESET_PARAM: 'RESET_PARAM',
 });
 
 export default actionType;
