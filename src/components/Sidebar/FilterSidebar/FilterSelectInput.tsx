@@ -1,13 +1,14 @@
-import { useContext, useEffect, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 import { expandIcon, shortenIcon } from '../../../assets/svg/icon';
 import SelectInput from './SelectInput';
-import { DataContext } from '@/pages';
+import { useDispatch } from 'react-redux';
+import { RemoveParam, UpdateParam } from '@/src/Store/Actions';
 
 function FilterSelectInput({ data }: any) {
     const [display, setDisplay] = useState(false);
-    const { param, setParam } = useContext<any>(DataContext);
     const [categorySelect, setCategorySelect] = useState<any>();
-    const newParam = { ...param };
+
+    const dispatch = useDispatch();
 
     const handleFilter = (select: boolean, query_value: any) => {
         if (categorySelect == undefined) {
@@ -23,11 +24,15 @@ function FilterSelectInput({ data }: any) {
 
     useEffect(() => {
         if (categorySelect == undefined || categorySelect.length == 0) {
-            delete newParam['param'][data.query_name];
+            const removeParam = [data.query_name];
+            dispatch(RemoveParam(removeParam));
         } else {
-            newParam['param'][data.query_name] = categorySelect.join();
+            dispatch(
+                UpdateParam({
+                    [data.query_name]: categorySelect.join(),
+                }),
+            );
         }
-        setParam(newParam);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [categorySelect]);
 
@@ -80,4 +85,4 @@ function FilterSelectInput({ data }: any) {
     );
 }
 
-export default FilterSelectInput;
+export default memo(FilterSelectInput);

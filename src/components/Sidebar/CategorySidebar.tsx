@@ -1,14 +1,20 @@
 import { DataContext } from '@/pages';
+import { UpdateParam } from '@/src/Store/Actions';
 import { useContext } from 'react';
+import { useDispatch } from 'react-redux';
 
-function CategorySidebar({ category }: any) {
-    const { param, setParam } = useContext<any>(DataContext);
-    const newParam = { ...param };
+function CategorySidebar() {
+    const { dataProduct } = useContext<any>(DataContext);
+    const category = dataProduct.filters.find((x: any) => x.query_name == 'category');
+    const dispatch = useDispatch();
 
     const handleCategory = (query_name: any, url_key: any, query_value: number) => {
-        newParam['param'][query_name] = query_value;
-        newParam['param'].urlKey = url_key;
-        setParam(newParam);
+        const newParam = {
+            [query_name]: query_value,
+            urlKey: url_key,
+        };
+
+        dispatch(UpdateParam(newParam));
     };
     return (
         <div className="list px-[16px] pb-[12px]">

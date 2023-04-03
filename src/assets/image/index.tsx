@@ -15,6 +15,9 @@ const images = {
     radioCheckedIcon: require('./radio-checked-icon.png'),
     nextImage: require('./next-img.png'),
     product: require('./product.jpg'),
+    prevDisablePage: require('./prevDisablePage.png'),
+    nextActivePage: require('./nextActivePage.png'),
+    threeDot: require('./ThreeDot.png'),
 };
 
 export default images;

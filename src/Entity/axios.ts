@@ -1,25 +1,10 @@
 import axios from 'axios';
 
-export interface Params {
-    baseUrl: string;
-    method: string;
-    param: {
-        limit?: any;
-        include?: any;
-        aggregations?: any;
-        category?: any;
-        page?: any;
-        trackity_id?: any;
-        urlKey?: any;
-        brand?: any;
-    };
-}
-
-export const getAPI = async (param: any): Promise<any> => {
+export const getAPI = async (parameter: any): Promise<any> => {
     return await axios({
-        ...param,
-        url: `${param.baseUrl}`,
-        params: param.param,
+        url: `https://tiki.vn/api/personalish/v1/blocks/listings`,
+        method: 'get',
+        params: { ...parameter },
     })
         .then((response) => {
             return {
@@ -36,8 +21,8 @@ export const getAPI = async (param: any): Promise<any> => {
         });
 };
 
-export async function getData(param: any) {
-    const res = await getAPI(param);
+export async function getData(parameter: any) {
+    const res = await getAPI(parameter);
     const data = await res.data;
     return data;
 }

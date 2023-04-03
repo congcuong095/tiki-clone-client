@@ -1,18 +1,29 @@
 import { DataContext } from '@/pages';
 import { drawStarRating } from '@/src/Helper/Helper';
+import { RemoveParam, UpdateParam } from '@/src/Store/Actions';
 import { useContext } from 'react';
+import { useDispatch } from 'react-redux';
 
-function RatingFilterSidebar({ rating }: any) {
-    const { param, setParam } = useContext<any>(DataContext);
-    const newParam = { ...param };
+function RatingFilterSidebar() {
+    const { dataProduct } = useContext<any>(DataContext);
+    const rating = dataProduct.filters.find((x: any) => x.query_name == 'rating');
+    const dispatch = useDispatch();
 
     const handleRating = (query_name: any, select: boolean, query_value: number) => {
         if (select) {
-            delete newParam['param'][query_name];
+            // delete newParam['param'][query_name];
+            const newParam = [query_name];
+
+            dispatch(RemoveParam(newParam));
         } else {
-            newParam['param'][query_name] = query_value;
+            // newParam['param'][query_name] = query_value;
+
+            dispatch(
+                UpdateParam({
+                    [query_name]: query_value,
+                }),
+            );
         }
-        setParam(newParam);
     };
 
     return (

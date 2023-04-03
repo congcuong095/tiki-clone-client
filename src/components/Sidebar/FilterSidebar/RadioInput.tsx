@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 import images from '../../../assets/image';
 
 function RadioInput({ content, image, idCheck, id, checkRadio }: any) {
@@ -40,4 +40,4 @@ function RadioInput({ content, image, idCheck, id, checkRadio }: any) {
     );
 }
 
-export default RadioInput;
+export default memo(RadioInput);

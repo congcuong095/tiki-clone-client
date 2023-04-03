@@ -1,7 +1,6 @@
 import actionType from '../Actions/actionType';
-import { Parameter } from '@/src/Enity/axios';
 
-const initState: Parameter = {
+const initState: any = {
     limit: 40,
     include: 'advertisement',
     aggregations: 2,
@@ -14,8 +13,6 @@ const initState: Parameter = {
 export default function ParamReducer(state = initState, action: any) {
     switch (action.type) {
         case actionType.UPDATE_PARAM:
-            console.log(state);
-
             return { ...state, ...action.payload };
         case actionType.REMOVE_PARAM:
             if (state) {

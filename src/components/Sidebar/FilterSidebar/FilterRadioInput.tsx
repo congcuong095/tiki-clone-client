@@ -1,21 +1,27 @@
-import { useContext, useEffect, useState } from 'react';
+import { memo, useContext, useEffect, useState } from 'react';
 import { expandIcon, shortenIcon } from '../../../assets/svg/icon';
 import RadioInput from './RadioInput';
 import { DataContext } from '@/pages';
+import { useDispatch } from 'react-redux';
+import { RemoveParam, UpdateParam } from '@/src/Store/Actions';
 
 function FilterRadioInput({ data }: any) {
     const [display, setDisplay] = useState(false);
     const [idCheck, setIdCheck] = useState(-1);
-    const { param, setParam } = useContext<any>(DataContext);
-    const newParam = { ...param };
+
+    const dispatch = useDispatch();
 
     const handleFilter = (select: boolean, query_value: any) => {
         if (select) {
-            delete newParam['param'][data.query_name];
+            const removeParam = [data.query_name];
+            dispatch(RemoveParam(removeParam));
         } else {
-            newParam['param'][data.query_name] = query_value;
+            dispatch(
+                UpdateParam({
+                    [data.query_name]: query_value,
+                }),
+            );
         }
-        setParam(newParam);
     };
 
     return (
@@ -80,4 +86,4 @@ function FilterRadioInput({ data }: any) {
     );
 }
 
-export default FilterRadioInput;
+export default memo(FilterRadioInput);

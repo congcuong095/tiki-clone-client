@@ -4,6 +4,7 @@ import Sidebar from '@/src/components/Sidebar/Sidebar';
 import { UnderHeaderArticle } from '../components/Article';
 import React from 'react';
 import { nextIcon } from '../assets/svg/icon';
+import Product from '../components/Product/Product';
 
 function ProductLayout({ children }: any) {
     return (
@@ -35,7 +36,7 @@ function ProductLayout({ children }: any) {
                 <div className="container  w-[1270px] px-[15px] mx-[auto]">
                     <div className="container-view flex justify-between items-start w-full">
                         <Sidebar />
-                        {children}
+                        <Product />
                     </div>
                 </div>
             </div>

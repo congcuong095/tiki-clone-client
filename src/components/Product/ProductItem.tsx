@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { goldStar } from '../../assets/svg/icon';
 import { convertPrice } from '../../Helper/Helper';
+import { memo } from 'react';
 
 function ProductItem({ dataProduct }: any) {
     const handleAstra = (value: any) => {
@@ -137,4 +138,4 @@ function ProductItem({ dataProduct }: any) {
     );
 }
 
-export default ProductItem;
+export default memo(ProductItem);

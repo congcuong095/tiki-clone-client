@@ -1,9 +1,13 @@
 import { checkedIcon, checkIcon } from '../../../assets/svg/icon';
 import Image from 'next/image';
-import { useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 
 function SelectInput({ content, image, selected }: any) {
     const [check, setCheck] = useState(selected);
+    useEffect(() => {
+        setCheck(selected);
+    }, [selected]);
+
     return (
         <label
             className="list-item-container mr-[2px] w-full  flex justify-start items-center cursor-pointer"
@@ -31,4 +35,4 @@ function SelectInput({ content, image, selected }: any) {
     );
 }
 
-export default SelectInput;
+export default memo(SelectInput);

@@ -3,7 +3,9 @@ import { convertPrice, filterData } from '@/src/Helper/Helper';
 import { useContext, useRef, useState } from 'react';
 import Button from '../Button';
 
-function PriceFilterSidebar({ price }: any) {
+function PriceFilterSidebar() {
+    const { dataProduct } = useContext<any>(DataContext);
+    const price = dataProduct.filters.find((x: any) => x.query_name == 'price');
     const { dataRoot, setDataProduct } = useContext<any>(DataContext);
     const [priceFrom, setPriceFrom] = useState('0');
     const [priceTo, setPriceTo] = useState('0');

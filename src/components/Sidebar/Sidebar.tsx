@@ -14,31 +14,23 @@ import CategorySidebar from './CategorySidebar';
 
 function Sidebar() {
     const { dataRoot } = useContext<any>(DataContext);
-    const [dataFilters, setDataFilters] = useState<any>(dataRoot.filters && [...dataRoot.filters]);
+    const dataFilters = dataRoot.filters;
 
-    let category;
-    let service;
-    let rating;
-    let price: any;
     let arrSelect;
     let cross_border;
     if (dataFilters != undefined) {
-        category = dataFilters.find((item: any) => item.query_name == 'category');
-        service = dataFilters.filter((item: any) => item.type == 'service');
-        rating = dataFilters.find((item: any) => item.query_name == 'rating');
-        price = dataFilters.find((item: any) => item.query_name == 'price');
         arrSelect = dataFilters.filter((item: any) => item.multi_select == true);
         cross_border = dataFilters.find((item: any) => item.query_name == 'is_cross_border');
     }
-    useEffect(() => {
-        setDataFilters(dataRoot.filters);
-    }, [dataRoot]);
+    // useEffect(() => {
+    //     setDataFilters(dataRoot.filters && [...dataRoot.filters]);
+    // }, [dataRoot]);
     return (
         <>
             {dataFilters && (
                 <div className="wrapper bg-[#ffffff] w-[200px] rounded-l-[4px]  overflow-hidden">
                     {/* category */}
-                    {category && <CategorySidebar category={category} />}
+                    <CategorySidebar />
                     {/* Địa chỉ */}
                     <div className="list px-[16px] pb-[12px] border-t border-solid border-[#ebebf0]">
                         <h4 className="list-title m-0 leading-[20px] block text-textPrimary text-[14px] py-[12px] font-medium">
@@ -52,12 +44,12 @@ function Sidebar() {
                         </div>
                     </div>
                     {/* Dich vu */}
-                    {service && <ServiceFilterSidebar service={service} />}
+                    <ServiceFilterSidebar />
                     {/* Đánh giá */}
-                    {rating && <RatingFilterSidebar rating={rating} />}
+                    <RatingFilterSidebar />
 
                     {/* Giá */}
-                    {price && <PriceFilterSidebar price={price} />}
+                    <PriceFilterSidebar />
                     {/* Select */}
                     {arrSelect &&
                         arrSelect.map((item: any, index: any) => {
