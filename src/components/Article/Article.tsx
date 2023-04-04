@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import images from '../assets/image';
+import images from '../../assets/image';
 
 export function UnderHeaderArticle() {
     return (
@@ -67,22 +67,6 @@ export function UnderSidebarArticle() {
                         </div>
                     </div>
                 </a>
-            </div>
-        </>
-    );
-}
-export function TopProductArticle() {
-    return (
-        <>
-            <div className="wrapper">
-                <Image src={images.nextImage} className="back-image" alt="" />
-                <div className="list">
-                    <div className="list-wrap">
-                        <div className="list-item"></div>
-                    </div>
-                </div>
-                <Image src={images.nextImage} className="next-image" alt="" />
-                <ul className="list-dot"></ul>
             </div>
         </>
     );

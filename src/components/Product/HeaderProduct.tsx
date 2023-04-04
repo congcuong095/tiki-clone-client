@@ -4,23 +4,19 @@ import images from '@/src/assets/image';
 import Image from 'next/image';
 import { useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import TopProductArticle from '../Article/TopProductArticle';
 
 function HeaderProduct() {
     const { dataProduct } = useContext<any>(DataContext);
     const dataSort = dataProduct.sort_options;
-    const dataService =
-        dataProduct.filters &&
-        dataProduct.filters.filter(
-            (x: any) => x.query_name == 'support_p2h_delivery' || x.query_name == 'seller_asa_cashback',
-        );
-    const dataFilter =
-        dataProduct.filters &&
-        dataProduct.filters.filter(
-            (x: any) =>
-                x.query_name != 'category' &&
-                x.query_name != 'support_p2h_delivery' &&
-                x.query_name != 'seller_asa_cashback',
-        );
+    const filterService = (x: any) => {
+        x.query_name == 'support_p2h_delivery' || x.query_name == 'seller_asa_cashback';
+    };
+    const dataService = dataProduct.filters && dataProduct.filters.filter(filterService);
+    const filters = (x: any) => {
+        x.query_name != 'category' && x.query_name != 'support_p2h_delivery' && x.query_name != 'seller_asa_cashback';
+    };
+    const dataFilter = dataProduct.filters && dataProduct.filters.filter(filters);
     const dataPage = dataProduct.paging;
     const dispatch = useDispatch();
 
@@ -65,33 +61,29 @@ function HeaderProduct() {
 
     const handleSortBottom = () => {
         let arr: JSX.Element[] = [];
+        let liFunc = (content: string) => {
+            return (
+                <p
+                    key={content}
+                    className="filter-bottom-item bg-[#dbeeff] border border-solid border-[#1a94ff] cursor-pointer text-[#1a94ff] text-[13px] px-[12px] py-[10px] leading-[20px] relative rounded-[100px] flex mr-[10px] mb-0 h-[32px] items-center"
+                >
+                    {content}
+                </p>
+            );
+        };
         dataFilter &&
             dataFilter.forEach((item: any) => {
                 if (item.query_name == 'support_installment') {
                     item.values.forEach((x: any) => {
                         if (x.selected) {
-                            const li = (
-                                <p
-                                    key={item.display_name}
-                                    className="filter-bottom-item bg-[#dbeeff] border border-solid border-[#1a94ff] cursor-pointer text-[#1a94ff] text-[13px] px-[12px] py-[10px] leading-[20px] relative rounded-[100px] flex mr-[10px] mb-0 h-[32px] items-center"
-                                >
-                                    {item.display_name}
-                                </p>
-                            );
+                            const li = liFunc(item.display_name);
                             arr.push(li);
                         }
                     });
                 } else {
                     item.values.forEach((x: any) => {
                         if (x.selected) {
-                            const li = (
-                                <p
-                                    key={x.display_value}
-                                    className="filter-bottom-item bg-[#dbeeff] border border-solid border-[#1a94ff] cursor-pointer text-[#1a94ff] text-[13px] px-[12px] py-[10px] leading-[20px] relative rounded-[100px] flex mr-[10px] mb-0 h-[32px] items-center"
-                                >
-                                    {x.display_value}
-                                </p>
-                            );
+                            const li = liFunc(x.display_value);
                             arr.push(li);
                         }
                     });
@@ -109,7 +101,9 @@ function HeaderProduct() {
                 <div className="title pt-[12px] pl-[16px]">
                     <h1 className=" inline font-normal text-textPrimary text-[20px]">Ô Tô - Xe Máy - Xe Đạp</h1>
                 </div>
-                <div className="article"></div>
+                <div className="article">
+                    <TopProductArticle />
+                </div>
                 <div className="filter clear-both">
                     <div className="filter-top flex justify-between border-b border-solid border-[#f2f2f2] pt-[12px]">
                         <div className="sort mr-[10px]">

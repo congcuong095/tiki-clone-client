@@ -9,11 +9,7 @@ export const drawStarRating = (numb: string) => {
     const draw = (): any[] => {
         let arr: any[] = [];
         for (let i: number = 1; i <= 5; i++) {
-            if (i <= count) {
-                arr.push(goldStar);
-            } else {
-                arr.push(grayStar);
-            }
+            arr.push(i <= count ? goldStar : grayStar);
         }
         return arr;
     };

@@ -1,17 +1,18 @@
-import Footer from '@/src/components/Footer';
+import Footer from '@/src/components/Footer/Footer';
 import Header from '@/src/components/Header';
 import Sidebar from '@/src/components/Sidebar/Sidebar';
-import { UnderHeaderArticle } from '../components/Article';
+import { UnderHeaderArticle } from '../components/Article/Article';
 import React from 'react';
 import { nextIcon } from '../assets/svg/icon';
 import Product from '../components/Product/Product';
+import RecentlyProduct from '../components/RecentlyProduct';
 
-function ProductLayout({ children }: any) {
+function ProductLayout() {
     return (
-        <>
+        <div className=" bg-[#f5f5fa]">
             <Header />
             <UnderHeaderArticle />
-            <div className="main bg-[#f5f5fa]">
+            <div className="main ">
                 <div className="category">
                     <div className="category-wrapper w-[1270px] px-[15px] mx-auto">
                         <div className="breadcrumb flex items-center">
@@ -38,10 +39,11 @@ function ProductLayout({ children }: any) {
                         <Sidebar />
                         <Product />
                     </div>
+                    <RecentlyProduct />
                 </div>
             </div>
             <Footer />
-        </>
+        </div>
     );
 }
 

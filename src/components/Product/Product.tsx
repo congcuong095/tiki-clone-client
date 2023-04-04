@@ -1,6 +1,6 @@
 import { DataContext } from '@/pages';
 import React, { memo, useContext, useState } from 'react';
-import { TopProductArticle } from '../Article';
+import { TopProductArticle } from '../Article/Article';
 import ProductItem from './ProductItem';
 import { warningIcon } from '@/src/assets/svg/icon';
 import Pagination from '../Pagination/Pagination';

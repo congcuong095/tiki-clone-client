@@ -1,7 +1,7 @@
 import { expandIcon, shortenIcon } from '../../assets/svg/icon';
 import FilterSelectInput from './FilterSidebar/FilterSelectInput';
 import Button from '../Button';
-import { UnderSidebarArticle } from '../Article';
+import { UnderSidebarArticle } from '../Article/Article';
 import FilterRadioInput from './FilterSidebar/FilterRadioInput';
 import { drawStarRating, filterData, convertPrice } from '../../Helper/Helper';
 import { useContext, useEffect, useRef, useState } from 'react';
@@ -22,9 +22,7 @@ function Sidebar() {
         arrSelect = dataFilters.filter((item: any) => item.multi_select == true);
         cross_border = dataFilters.find((item: any) => item.query_name == 'is_cross_border');
     }
-    // useEffect(() => {
-    //     setDataFilters(dataRoot.filters && [...dataRoot.filters]);
-    // }, [dataRoot]);
+
     return (
         <>
             {dataFilters && (

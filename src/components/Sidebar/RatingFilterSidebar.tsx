@@ -11,13 +11,9 @@ function RatingFilterSidebar() {
 
     const handleRating = (query_name: any, select: boolean, query_value: number) => {
         if (select) {
-            // delete newParam['param'][query_name];
             const newParam = [query_name];
-
             dispatch(RemoveParam(newParam));
         } else {
-            // newParam['param'][query_name] = query_value;
-
             dispatch(
                 UpdateParam({
                     [query_name]: query_value,

@@ -5,11 +5,7 @@ import images from '../../../assets/image';
 function RadioInput({ content, image, idCheck, id, checkRadio }: any) {
     const [check, setCheck] = useState(checkRadio);
     useEffect(() => {
-        if (idCheck == id) {
-            setCheck(true);
-        } else {
-            setCheck(false);
-        }
+        setCheck(idCheck == id);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [idCheck]);
     return (

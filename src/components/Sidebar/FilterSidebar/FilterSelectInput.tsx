@@ -13,12 +13,12 @@ function FilterSelectInput({ data }: any) {
     const handleFilter = (select: boolean, query_value: any) => {
         if (categorySelect == undefined) {
             setCategorySelect([query_value]);
-        } else {
-            if (!select) {
-                setCategorySelect((prev: any) => [...prev, query_value]);
-            } else {
-                setCategorySelect(categorySelect.filter((x: any) => x != query_value));
-            }
+        }
+        if (categorySelect != undefined && !select) {
+            setCategorySelect((prev: any) => [...prev, query_value]);
+        }
+        if (categorySelect != undefined && select) {
+            setCategorySelect(categorySelect.filter((x: any) => x != query_value));
         }
     };
 

@@ -6,10 +6,10 @@ export const getAPI = async (parameter: any): Promise<any> => {
         method: 'get',
         params: { ...parameter },
     })
-        .then((response) => {
+        .then(({ status, data }) => {
             return {
-                status: response.status,
-                data: response.data,
+                status: status,
+                data: data,
             };
         })
         .catch((error) => {
@@ -23,8 +23,7 @@ export const getAPI = async (parameter: any): Promise<any> => {
 
 export async function getData(parameter: any) {
     const res = await getAPI(parameter);
-    const data = await res.data;
-    return data;
+    return await res.data;
 }
 
 // export async function getStaticProps() {

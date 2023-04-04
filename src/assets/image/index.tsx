@@ -18,6 +18,14 @@ const images = {
     prevDisablePage: require('./prevDisablePage.png'),
     nextActivePage: require('./nextActivePage.png'),
     threeDot: require('./ThreeDot.png'),
+    boCongThuong: require('./bo-cong-thuong-2.png'),
+    qrcode: require('./qrcode.png'),
+    appstore: require('./appstore.png'),
+    playstore: require('./playstore.png'),
+    trusted: require('./trusted.png'),
+    official: require('./official.png'),
+    freeshipSlide: require('./freeship-slide.png'),
+    dealSlide: require('./deal-slide.png'),
 };
 
 export default images;

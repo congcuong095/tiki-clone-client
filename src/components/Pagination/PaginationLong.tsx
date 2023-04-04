@@ -46,6 +46,8 @@ function PaginationLong() {
         return arrPage;
     };
     const handlePageNumber = () => {
+        const current = dataPaging.current_page;
+        const last = dataPaging.last_page;
         if (dataPaging.last_page > 5) {
             let arrPage: JSX.Element[] = [];
             const ThreeDot = (
@@ -76,26 +78,26 @@ function PaginationLong() {
                 </>
             );
 
-            if (dataPaging.current_page <= 3) {
+            if (current <= 3) {
                 arrPage = drawPage(1, 5);
                 arrPage.push(ThreeDot);
                 arrPage.push(liCompLast);
-            } else if (dataPaging.current_page >= dataPaging.last_page - 2) {
-                arrPage = drawPage(dataPaging.last_page - 4, dataPaging.last_page);
+            } else if (current >= last - 2) {
+                arrPage = drawPage(last - 4, last);
                 arrPage.unshift(ThreeDot);
                 arrPage.unshift(liCompFirst);
-            } else if (dataPaging.current_page == 4) {
+            } else if (current == 4) {
                 arrPage = drawPage(2, 6);
                 arrPage.unshift(liCompFirst);
                 arrPage.push(ThreeDot);
                 arrPage.push(liCompLast);
-            } else if (dataPaging.current_page == dataPaging.last_page - 3) {
-                arrPage = drawPage(dataPaging.last_page - 5, dataPaging.last_page - 1);
+            } else if (current == last - 3) {
+                arrPage = drawPage(last - 5, last - 1);
                 arrPage.unshift(ThreeDot);
                 arrPage.unshift(liCompFirst);
                 arrPage.push(liCompLast);
             } else {
-                arrPage = drawPage(dataPaging.current_page - 2, dataPaging.current_page + 2);
+                arrPage = drawPage(current - 2, current + 2);
                 arrPage.unshift(ThreeDot);
                 arrPage.unshift(liCompFirst);
                 arrPage.push(ThreeDot);
