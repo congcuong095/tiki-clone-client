@@ -1,7 +1,6 @@
-import { memo, useContext, useEffect, useState } from 'react';
+import { memo, useState } from 'react';
 import { expandIcon, shortenIcon } from '../../../assets/svg/icon';
 import RadioInput from './RadioInput';
-import { DataContext } from '@/pages';
 import { useDispatch } from 'react-redux';
 import { RemoveParam, UpdateParam } from '@/src/Store/Actions';
 

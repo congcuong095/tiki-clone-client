@@ -1,11 +1,7 @@
-import { expandIcon, shortenIcon } from '../../assets/svg/icon';
 import FilterSelectInput from './FilterSidebar/FilterSelectInput';
-import Button from '../Button';
 import { UnderSidebarArticle } from '../Article/Article';
 import FilterRadioInput from './FilterSidebar/FilterRadioInput';
-import { drawStarRating, filterData, convertPrice } from '../../Helper/Helper';
-import { useContext, useEffect, useRef, useState } from 'react';
-import SelectInput from './FilterSidebar/SelectInput';
+import { useContext } from 'react';
 import { DataContext } from '@/pages';
 import PriceFilterSidebar from './PriceFilterSidebar';
 import ServiceFilterSidebar from './ServiceFilterSidebar';

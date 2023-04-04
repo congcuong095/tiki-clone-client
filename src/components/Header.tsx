@@ -17,7 +17,7 @@ function Header() {
     }
     return (
         <>
-            <div className="wrapper relative py-[8px] to-backgroundPrimary">
+            <div className="wrapper relative py-[8px] bg-[#ffffff]">
                 <div className="container max-w-[1280px] px-[24px] mx-auto tracking-normal">
                     <div className="main flex h-auto relative z-[2] items-center">
                         <div className="main-left flex items-center flex-1">

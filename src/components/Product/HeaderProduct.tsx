@@ -9,14 +9,19 @@ import TopProductArticle from '../Article/TopProductArticle';
 function HeaderProduct() {
     const { dataProduct } = useContext<any>(DataContext);
     const dataSort = dataProduct.sort_options;
-    const filterService = (x: any) => {
-        x.query_name == 'support_p2h_delivery' || x.query_name == 'seller_asa_cashback';
-    };
-    const dataService = dataProduct.filters && dataProduct.filters.filter(filterService);
-    const filters = (x: any) => {
-        x.query_name != 'category' && x.query_name != 'support_p2h_delivery' && x.query_name != 'seller_asa_cashback';
-    };
-    const dataFilter = dataProduct.filters && dataProduct.filters.filter(filters);
+    const dataFilters = dataProduct.filters;
+    function filterService(x: any) {
+        return x.query_name == 'support_p2h_delivery' || x.query_name == 'seller_asa_cashback';
+    }
+    function filters(x: any) {
+        return (
+            x.query_name != 'category' &&
+            x.query_name != 'support_p2h_delivery' &&
+            x.query_name != 'seller_asa_cashback'
+        );
+    }
+    const dataService = dataFilters && dataFilters.filter(filterService);
+    const dataFilter = dataFilters && dataFilters.filter(filters);
     const dataPage = dataProduct.paging;
     const dispatch = useDispatch();
 

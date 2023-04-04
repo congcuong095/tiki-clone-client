@@ -1,5 +1,5 @@
 import { DataContext } from '@/pages';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import SelectInput from './FilterSidebar/SelectInput';
 import { expandIcon, shortenIcon } from '@/src/assets/svg/icon';
 import { useDispatch } from 'react-redux';

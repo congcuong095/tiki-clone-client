@@ -1,3 +1,5 @@
+import { memo } from 'react';
+
 function LinkFooter({ content }: any) {
     return (
         <>
@@ -8,4 +10,4 @@ function LinkFooter({ content }: any) {
     );
 }
 
-export default LinkFooter;
+export default memo(LinkFooter);
