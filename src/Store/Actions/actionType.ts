@@ -1,13 +1,14 @@
 const actionType = Object.freeze({
     //data
-    FETCH_PRODUCTS_PENDING: 'FETCH_PRODUCTS_PENDING',
-    FETCH_PRODUCTS_SUCCESS: 'FETCH_PRODUCTS_SUCCESS',
-    FETCH_PRODUCTS_ERROR: 'FETCH_PRODUCTS_ERROR',
+    FETCH_PRODUCTS: 'FETCH_PRODUCTS',
 
     //query param
     UPDATE_PARAM: 'UPDATE_PARAM',
     REMOVE_PARAM: 'REMOVE_PARAM',
     RESET_PARAM: 'RESET_PARAM',
+
+    //search
+    FETCH_SEARCH: 'FETCH_SEARCH',
 });
 
 export default actionType;

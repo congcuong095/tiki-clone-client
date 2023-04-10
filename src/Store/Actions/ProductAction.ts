@@ -1,21 +1,8 @@
 import actionType from './actionType';
 
-export const fetchProductsPending = () => {
+export const fetchProducts = (data: any) => {
     return {
-        type: actionType.FETCH_PRODUCTS_PENDING,
-    };
-};
-
-export const fetchProductsSuccess = (products: any) => {
-    return {
-        type: actionType.FETCH_PRODUCTS_SUCCESS,
-        products: products,
-    };
-};
-
-export const fetchProductsError = (error: any) => {
-    return {
-        type: actionType.FETCH_PRODUCTS_ERROR,
-        error: error,
+        type: actionType.FETCH_PRODUCTS,
+        products: data,
     };
 };

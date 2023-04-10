@@ -7,7 +7,7 @@ import { nextIcon } from '../assets/svg/icon';
 import Product from '../components/Product/Product';
 import RecentlyProduct from '../components/RecentlyProduct';
 
-function ProductLayout() {
+function ProductLayout({ children }: any) {
     return (
         <div className=" bg-[#f5f5fa]">
             <Header />
@@ -37,7 +37,7 @@ function ProductLayout() {
                 <div className="container  w-[1270px] px-[15px] mx-[auto]">
                     <div className="container-view flex justify-between items-start w-full">
                         <Sidebar />
-                        <Product />
+                        {children}
                     </div>
                     <RecentlyProduct />
                 </div>

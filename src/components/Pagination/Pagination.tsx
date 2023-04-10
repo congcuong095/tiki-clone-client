@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { UpdateParam } from '@/src/Store/Actions';
 
 function Pagination() {
-    const { dataProduct } = useContext<any>(DataContext);
+    const dataProduct = useSelector((state: any) => state.ProductReducer).data;
     const dataPaging = dataProduct.paging;
     const param = useSelector((state: any) => state.ParamReducer);
     const dispatch = useDispatch();

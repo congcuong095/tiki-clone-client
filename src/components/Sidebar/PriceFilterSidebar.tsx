@@ -2,11 +2,12 @@ import { DataContext } from '@/pages';
 import { convertPrice, filterData } from '@/src/Helper/Helper';
 import { useContext, useRef, useState } from 'react';
 import Button from '../Button';
+import { useSelector } from 'react-redux';
 
 function PriceFilterSidebar() {
-    const { dataProduct } = useContext<any>(DataContext);
-    const price = dataProduct.filters.find((x: any) => x.query_name == 'price');
-    const { dataRoot, setDataProduct } = useContext<any>(DataContext);
+    const { dataProduct, setDataProduct } = useContext<any>(DataContext);
+    const price = dataProduct.filters && dataProduct.filters.find((x: any) => x.query_name == 'price');
+    const dataRoot = useSelector((state: any) => state.ProductReducer).data;
     const [priceFrom, setPriceFrom] = useState('0');
     const [priceTo, setPriceTo] = useState('0');
     const [priceIndex, setPriceIndex] = useState(-1);

@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import TopProductArticle from '../Article/TopProductArticle';
 
 function HeaderProduct() {
-    const { dataProduct } = useContext<any>(DataContext);
+    const dataProduct = useSelector((state: any) => state.ProductReducer).data;
     const dataSort = dataProduct.sort_options;
     const dataFilters = dataProduct.filters;
     function filterService(x: any) {

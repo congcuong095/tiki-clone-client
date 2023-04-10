@@ -1,16 +1,15 @@
 import FilterSelectInput from './FilterSidebar/FilterSelectInput';
 import { UnderSidebarArticle } from '../Article/Article';
 import FilterRadioInput from './FilterSidebar/FilterRadioInput';
-import { useContext } from 'react';
-import { DataContext } from '@/pages';
 import PriceFilterSidebar from './PriceFilterSidebar';
 import ServiceFilterSidebar from './ServiceFilterSidebar';
 import RatingFilterSidebar from './RatingFilterSidebar';
 import CategorySidebar from './CategorySidebar';
+import { useSelector } from 'react-redux';
 
 function Sidebar() {
-    const { dataRoot } = useContext<any>(DataContext);
-    const dataFilters = dataRoot.filters;
+    const dataProduct = useSelector((state: any) => state.ProductReducer).data;
+    const dataFilters = dataProduct.filters;
 
     let arrSelect;
     let cross_border;

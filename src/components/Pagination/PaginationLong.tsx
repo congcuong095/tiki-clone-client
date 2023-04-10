@@ -1,12 +1,10 @@
-import { DataContext } from '@/pages';
 import { UpdateParam } from '@/src/Store/Actions';
-import { useContext } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Image from 'next/image';
 import images from '@/src/assets/image';
 
 function PaginationLong() {
-    const { dataProduct } = useContext<any>(DataContext);
+    const dataProduct = useSelector((state: any) => state.ProductReducer).data;
     const dataPaging = dataProduct.paging;
     const dispatch = useDispatch();
     const handleChoosePage = (selectPage: number) => {

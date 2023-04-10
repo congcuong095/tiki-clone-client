@@ -5,6 +5,7 @@ import { memo } from 'react';
 import images from '@/src/assets/image';
 
 function ProductItem({ dataProduct }: any) {
+    const badges_new = dataProduct.badges_new;
     const handleAstra = (value: any) => {
         let str;
         let arr;
@@ -40,22 +41,20 @@ function ProductItem({ dataProduct }: any) {
                                 <span className="product-main flex text-textPrimary no-underline flex-col justify-between">
                                     <div className="thumbnail shrink-0 w-[200px] h-[200px] text-center relative">
                                         <div className=" absolute z-[2]"></div>
-                                        {dataProduct['badges_new'] &&
-                                            dataProduct['badges_new'].find((x: any) => x.code === 'trusted_store') && (
-                                                <Image
-                                                    src={images.trusted}
-                                                    alt=""
-                                                    className=" top-0 left-0 block absolute z-[2] w-[54px] h-[14px]"
-                                                />
-                                            )}
-                                        {dataProduct['badges_new'] &&
-                                            dataProduct['badges_new'].find((x: any) => x.code === 'official_store') && (
-                                                <Image
-                                                    src={images.official}
-                                                    alt=""
-                                                    className=" top-0 left-0 block absolute z-[2] w-[68px] h-[14px]"
-                                                />
-                                            )}
+                                        {badges_new && badges_new.find((x: any) => x.code === 'trusted_store') && (
+                                            <Image
+                                                src={images.trusted}
+                                                alt=""
+                                                className=" top-0 left-0 block absolute z-[2] w-[54px] h-[14px]"
+                                            />
+                                        )}
+                                        {badges_new && badges_new.find((x: any) => x.code === 'official_store') && (
+                                            <Image
+                                                src={images.official}
+                                                alt=""
+                                                className=" top-0 left-0 block absolute z-[2] w-[68px] h-[14px]"
+                                            />
+                                        )}
                                         {dataProduct.advertisement && (
                                             <p className="fund bg-[#ebebf0] leading-[16px] inline-block px-[4px] text-[13px] m-0 absolute top-[4px] right-[4px] z-[1] rounded-[2px] text-textPrimary">
                                                 Tài trợ
@@ -72,6 +71,17 @@ function ProductItem({ dataProduct }: any) {
                                                 className=" absolute top-0 left-0 w-full h-auto object-contain"
                                             />
                                         </div>
+                                        {badges_new && badges_new.find((x: any) => x.code === 'asa_reward_badge') && (
+                                            <div className="badge-astra flex flex-row items-center absolute bottom-0 left-0">
+                                                <div className="group-astra flex flex-row items-center gap-[2px] pr-[8px] rounded-tr-[12px]">
+                                                    <Image
+                                                        src={images.astraBonus}
+                                                        alt=""
+                                                        className=" w-[53px] h-[20px]"
+                                                    />
+                                                </div>
+                                            </div>
+                                        )}
                                     </div>
                                     <div className="info py-[8px] mx-[12px] border-b border-solid border-[#ebebf0] min-h-[122px]">
                                         <div className="name overflow-hidden mt-[6px] min-h-[32px]">
@@ -116,22 +126,14 @@ function ProductItem({ dataProduct }: any) {
                                             </>
                                         )}
                                         <div className="badge-under-price text-textSecondary font-normal text-[11px] leading-[12px] min-h-[24px]">
-                                            {dataProduct.badges_new &&
-                                                dataProduct['badges_new'].find(
-                                                    (x: any) => x.type == 'asa_reward_html',
-                                                ) != null &&
-                                                handleAstra(
-                                                    dataProduct['badges_new'].find(
-                                                        (x: any) => x.type == 'asa_reward_html',
-                                                    ),
-                                                )}
+                                            {badges_new &&
+                                                badges_new.find((x: any) => x.type == 'asa_reward_html') != null &&
+                                                handleAstra(badges_new.find((x: any) => x.type == 'asa_reward_html'))}
                                         </div>
                                         <div className="badge-under-rating flex gap-[4px] flex-wrap mt-[6px] min-h-[17px]">
-                                            {dataProduct.badges_new &&
-                                                dataProduct['badges_new'].find(
-                                                    (x: any) => x.type == 'under_rating_text',
-                                                ) != null &&
-                                                dataProduct.badges_new.map((x: any) => {
+                                            {badges_new &&
+                                                badges_new.find((x: any) => x.type == 'under_rating_text') != null &&
+                                                badges_new.map((x: any) => {
                                                     if (x.type == 'under_rating_text') {
                                                         return (
                                                             <div
@@ -148,13 +150,9 @@ function ProductItem({ dataProduct }: any) {
                                     <div className="delivery flex px-[12px] py-[8px] gap-[4px]">
                                         <span className=" font-normal text-[13px] leading-[16px] text-textSecondary">
                                             {dataProduct.shippable == true &&
-                                            dataProduct['badges_new'] &&
-                                            dataProduct['badges_new'].find(
-                                                (x: any) => x.type == 'delivery_info_badge',
-                                            ) != null
-                                                ? dataProduct['badges_new'].find(
-                                                      (x: any) => x.type == 'delivery_info_badge',
-                                                  ).text
+                                            badges_new &&
+                                            badges_new.find((x: any) => x.type == 'delivery_info_badge') != null
+                                                ? badges_new.find((x: any) => x.type == 'delivery_info_badge').text
                                                 : 'Nhận hàng tại cửa hàng'}
                                         </span>
                                     </div>

@@ -1,29 +1,15 @@
 import actionType from '../Actions/actionType';
 
-const initialState = {
-    pending: false,
-    products: [],
-    error: null,
+const initialState: any = {
+    status: 0,
+    data: {},
 };
 
 export function ProductReducer(state = initialState, action: any) {
     switch (action.type) {
-        case actionType.FETCH_PRODUCTS_PENDING:
+        case actionType.FETCH_PRODUCTS:
             return {
-                ...state,
-                pending: true,
-            };
-        case actionType.FETCH_PRODUCTS_SUCCESS:
-            return {
-                ...state,
-                pending: false,
-                products: action.payload,
-            };
-        case actionType.FETCH_PRODUCTS_ERROR:
-            return {
-                ...state,
-                pending: false,
-                error: action.error,
+                ...action.products,
             };
         default:
             return state;

@@ -1,11 +1,9 @@
-import { DataContext } from '@/pages';
 import { UpdateParam } from '@/src/Store/Actions';
-import { useContext } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 function CategorySidebar() {
-    const { dataProduct } = useContext<any>(DataContext);
-    const category = dataProduct.filters.find((x: any) => x.query_name == 'category');
+    const dataProduct = useSelector((state: any) => state.ProductReducer).data;
+    const category = dataProduct.filters && dataProduct.filters.find((x: any) => x.query_name == 'category');
     const dispatch = useDispatch();
 
     const handleCategory = (query_name: any, url_key: any, query_value: number) => {

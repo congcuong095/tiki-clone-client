@@ -1,11 +1,10 @@
-import { DataContext } from '@/pages';
 import { drawStarRating } from '@/src/Helper/Helper';
 import { RemoveParam, UpdateParam } from '@/src/Store/Actions';
-import { useContext } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 function RatingFilterSidebar() {
-    const { dataProduct } = useContext<any>(DataContext);
+    const dataProduct = useSelector((state: any) => state.ProductReducer).data;
+
     const rating = dataProduct.filters.find((x: any) => x.query_name == 'rating');
     const dispatch = useDispatch();
 

@@ -26,6 +26,7 @@ const images = {
     official: require('./official.png'),
     freeshipSlide: require('./freeship-slide.png'),
     dealSlide: require('./deal-slide.png'),
+    astraBonus: require('./astra-bonus.png'),
 };
 
 export default images;

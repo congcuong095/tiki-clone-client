@@ -19,6 +19,7 @@ export default function TopProductArticle() {
                                         <a href="./" className=" block">
                                             <Image
                                                 src={images.dealSlide}
+                                                priority
                                                 alt=""
                                                 className=" block object-contain rounded-[8px] w-[495px] h-[165px]"
                                             />
@@ -45,6 +46,7 @@ export default function TopProductArticle() {
                                         <a href="./" className=" block">
                                             <Image
                                                 src={images.dealSlide}
+                                                priority
                                                 alt=""
                                                 className=" block object-contain rounded-[8px] w-[495px] h-[165px]"
                                             />
@@ -71,6 +73,7 @@ export default function TopProductArticle() {
                                         <a href="./" className=" block">
                                             <Image
                                                 src={images.dealSlide}
+                                                priority
                                                 alt=""
                                                 className=" block object-contain rounded-[8px] w-[495px] h-[165px]"
                                             />

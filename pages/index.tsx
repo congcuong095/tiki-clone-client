@@ -1,26 +1,31 @@
 import Product from '@/src/components/Product/Product';
-import ProductLayout from '@/src/layout/ProductLayout';
+import ProductLayout from '@/src/Layout/ProductLayout';
 import { createContext, useEffect, useState } from 'react';
-import { getData } from '@/src/Entity/axios';
-import { useSelector } from 'react-redux';
+import { getAPIProduct } from '@/src/Entity/axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchProducts } from '@/src/Store/Actions';
 
 export const DataContext = createContext({});
 
 export default function Home() {
-    const [dataRoot, setDataRoot] = useState<any>({});
     const [dataProduct, setDataProduct] = useState<any>({});
     const param = useSelector((state: any) => state.ParamReducer);
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        getData(param).then((res) => {
-            setDataRoot(res);
-            setDataProduct(res);
-        });
-    }, [param]);
+        getAPIProduct(param).then((res) => {
+            setDataProduct(res.data);
 
+            dispatch(fetchProducts(res));
+        });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [param]);
+    console.log(dataProduct);
     return (
-        <DataContext.Provider value={{ dataRoot, setDataProduct, dataProduct }}>
-            <ProductLayout></ProductLayout>
+        <DataContext.Provider value={{ setDataProduct, dataProduct }}>
+            <ProductLayout>
+                <Product />
+            </ProductLayout>
         </DataContext.Provider>
     );
 }

@@ -1,13 +1,12 @@
-import { DataContext } from '@/pages';
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import SelectInput from './FilterSidebar/SelectInput';
 import { expandIcon, shortenIcon } from '@/src/assets/svg/icon';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RemoveParam, UpdateParam } from '@/src/Store/Actions';
 
 function ServiceFilterSidebar() {
-    const { dataProduct } = useContext<any>(DataContext);
-    const service = dataProduct.filters.filter((item: any) => item.type == 'service');
+    const dataProduct = useSelector((state: any) => state.ProductReducer).data;
+    const service = dataProduct.filters && dataProduct.filters.filter((item: any) => item.type == 'service');
     const [displayService, setDisplayService] = useState(false);
     const dispatch = useDispatch();
 
