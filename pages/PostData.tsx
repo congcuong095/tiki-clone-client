@@ -1,4 +1,27 @@
+import { postAPIFake } from '@/src/Helper/axios';
+import { useState } from 'react';
+
 export default function PostData() {
+    const [checkCrossBorder, setCheckCrossBorder] = useState<any>([]);
+    const [checkColor, setCheckColor] = useState<any>([]);
+    const [checkBrand, setCheckBrand] = useState<any>([]);
+    const [checkSeller, setCheckSeller] = useState<any>([]);
+    const [checkCategory, setCheckCategory] = useState<any>([]);
+    const [product, setProduct] = useState<any>('');
+
+    const handlePost = async () => {
+        let data = {
+            ...JSON.parse(product),
+            category: checkCategory,
+            color: checkColor,
+            brand: checkBrand,
+            sellerBy: checkSeller,
+            crossBorder: checkCrossBorder,
+        };
+        console.log(data);
+        await postAPIFake(data).then((res) => console.log(res));
+    };
+
     return (
         <>
             <div className=" p-[20px] columns-5">
@@ -12,6 +35,7 @@ export default function PostData() {
                                     type="checkbox"
                                     value=""
                                     id="checkboxDefault"
+                                    onChange={() => setCheckCrossBorder((prev: any) => [...prev, item._id.$oid])}
                                 />
                                 <label
                                     className="inline-block pl-[0.15rem] hover:cursor-pointer"
@@ -33,6 +57,7 @@ export default function PostData() {
                                     type="checkbox"
                                     value=""
                                     id="checkboxDefault"
+                                    onChange={() => setCheckColor((prev: any) => [...prev, item._id.$oid])}
                                 />
                                 <label
                                     className="inline-block pl-[0.15rem] hover:cursor-pointer"
@@ -54,6 +79,7 @@ export default function PostData() {
                                     type="checkbox"
                                     value=""
                                     id="checkboxDefault"
+                                    onChange={() => setCheckSeller((prev: any) => [...prev, item._id.$oid])}
                                 />
                                 <label
                                     className="inline-block pl-[0.15rem] hover:cursor-pointer"
@@ -75,6 +101,7 @@ export default function PostData() {
                                     type="checkbox"
                                     value=""
                                     id="checkboxDefault"
+                                    onChange={() => setCheckBrand((prev: any) => [...prev, item._id.$oid])}
                                 />
                                 <label
                                     className="inline-block pl-[0.15rem] hover:cursor-pointer"
@@ -96,12 +123,17 @@ export default function PostData() {
                                     type="checkbox"
                                     value=""
                                     id="checkboxDefault"
+                                    onChange={() => setCheckCategory((prev: any) => [...prev, item._id.$oid])}
                                 />
                                 <label
                                     className="inline-block pl-[0.15rem] hover:cursor-pointer"
                                     htmlFor="checkboxDefault"
                                 >
-                                    {item.display_value}
+                                    {`"${item.display_value}"` +
+                                        ' lv' +
+                                        item.level_category +
+                                        ' ' +
+                                        item.parentCategory?.$oid}
                                 </label>
                             </div>
                         );
@@ -111,11 +143,20 @@ export default function PostData() {
             <div className=" p-[20px] flex">
                 <div>
                     <div>Product data</div>
-                    <textarea name="productData" id="" cols={30} rows={10} className=" border border-solid"></textarea>
+                    <textarea
+                        name="productData"
+                        id=""
+                        cols={30}
+                        rows={10}
+                        className=" border border-solid"
+                        value={product}
+                        onChange={(e) => setProduct(e.target.value)}
+                    ></textarea>
                 </div>
                 <button
                     className=" ml-[50px] cursor-pointer w-[92px] h-[38px] p-[4px]  bg-transparent text-primaryColor font-normal text-[14px]  leading-[150%] outline-0
-                                     flex items-center justify-center relative border-solid border-primaryColor border"
+                                         flex items-center justify-center relative border-solid border-primaryColor border"
+                    onClick={() => handlePost()}
                 >
                     Post
                 </button>
@@ -148,6 +189,13 @@ const color = [
         },
         display_value: 'Đen',
         query_value: 'Đen',
+        createdAt: {
+            $date: '2023-04-11T16:28:38.882Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T16:28:38.882Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -155,6 +203,13 @@ const color = [
         },
         display_value: 'Bạc',
         query_value: 'Bạc',
+        createdAt: {
+            $date: '2023-04-11T16:28:38.882Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T16:28:38.882Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -162,6 +217,13 @@ const color = [
         },
         display_value: 'Xanh dương',
         query_value: 'Xanh dương',
+        createdAt: {
+            $date: '2023-04-11T16:28:38.882Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T16:28:38.882Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -169,6 +231,13 @@ const color = [
         },
         display_value: 'Đỏ',
         query_value: 'Đỏ',
+        createdAt: {
+            $date: '2023-04-11T16:28:38.882Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T16:28:38.882Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -176,6 +245,13 @@ const color = [
         },
         display_value: 'Nâu',
         query_value: 'Nâu',
+        createdAt: {
+            $date: '2023-04-11T16:28:38.882Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T16:28:38.882Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -183,6 +259,13 @@ const color = [
         },
         display_value: 'Xanh lá',
         query_value: 'Xanh lá',
+        createdAt: {
+            $date: '2023-04-11T16:28:38.882Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T16:28:38.882Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -190,6 +273,13 @@ const color = [
         },
         display_value: 'Trắng',
         query_value: 'Trắng',
+        createdAt: {
+            $date: '2023-04-11T16:28:38.883Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T16:28:38.883Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -197,6 +287,13 @@ const color = [
         },
         display_value: 'Kem',
         query_value: 'Kem',
+        createdAt: {
+            $date: '2023-04-11T16:28:38.883Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T16:28:38.883Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -204,6 +301,13 @@ const color = [
         },
         display_value: 'Cam',
         query_value: 'Cam',
+        createdAt: {
+            $date: '2023-04-11T16:28:38.883Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T16:28:38.883Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -211,6 +315,13 @@ const color = [
         },
         display_value: 'Hồng',
         query_value: 'Hồng',
+        createdAt: {
+            $date: '2023-04-11T16:28:38.883Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T16:28:38.883Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -218,6 +329,13 @@ const color = [
         },
         display_value: 'Tím',
         query_value: 'Tím',
+        createdAt: {
+            $date: '2023-04-11T16:28:38.883Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T16:28:38.883Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -225,6 +343,13 @@ const color = [
         },
         display_value: 'Vàng',
         query_value: 'Vàng',
+        createdAt: {
+            $date: '2023-04-11T16:28:38.882Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T16:28:38.882Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -232,6 +357,13 @@ const color = [
         },
         display_value: 'Xám',
         query_value: 'Xám',
+        createdAt: {
+            $date: '2023-04-11T16:28:38.882Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T16:28:38.882Z',
+        },
+        __v: 0,
     },
 ];
 
@@ -242,6 +374,13 @@ const seller = [
         },
         display_value: 'TLG GOLD',
         query_value: '126349',
+        createdAt: {
+            $date: '2023-04-11T16:30:00.227Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T16:30:00.227Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -249,6 +388,13 @@ const seller = [
         },
         display_value: 'Chăm sóc xế yêu',
         query_value: '7702',
+        createdAt: {
+            $date: '2023-04-11T16:30:00.228Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T16:30:00.228Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -256,6 +402,13 @@ const seller = [
         },
         display_value: 'Trung Đức Việt Nam',
         query_value: '10130',
+        createdAt: {
+            $date: '2023-04-11T16:30:00.228Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T16:30:00.228Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -263,6 +416,13 @@ const seller = [
         },
         display_value: 'NANO PRO',
         query_value: '116752',
+        createdAt: {
+            $date: '2023-04-11T16:30:00.228Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T16:30:00.228Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -270,6 +430,13 @@ const seller = [
         },
         display_value: 'ChanChan Auto',
         query_value: '269567',
+        createdAt: {
+            $date: '2023-04-11T16:30:00.228Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T16:30:00.228Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -277,6 +444,13 @@ const seller = [
         },
         display_value: 'Shin Decal 1',
         query_value: '183570',
+        createdAt: {
+            $date: '2023-04-11T16:30:00.228Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T16:30:00.228Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -284,6 +458,13 @@ const seller = [
         },
         display_value: 'Phụ kiện đồ chơi xe ô tô',
         query_value: '253713',
+        createdAt: {
+            $date: '2023-04-11T16:30:00.228Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T16:30:00.228Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -291,6 +472,13 @@ const seller = [
         },
         display_value: 'phukienxenet',
         query_value: '132513',
+        createdAt: {
+            $date: '2023-04-11T16:30:00.228Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T16:30:00.228Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -298,6 +486,13 @@ const seller = [
         },
         display_value: 'Bộ Dây Vòi Tưới Cây Rửa Xe',
         query_value: '193166',
+        createdAt: {
+            $date: '2023-04-11T16:30:00.228Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T16:30:00.228Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -305,6 +500,13 @@ const seller = [
         },
         display_value: 'Xedep247',
         query_value: '65512',
+        createdAt: {
+            $date: '2023-04-11T16:30:00.228Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T16:30:00.228Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -312,6 +514,13 @@ const seller = [
         },
         display_value: 'DODAVIET88',
         query_value: '312670',
+        createdAt: {
+            $date: '2023-04-11T16:30:00.228Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T16:30:00.228Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -319,6 +528,13 @@ const seller = [
         },
         display_value: 'Vòi Xịt Rửa Xe Tưới Cây',
         query_value: '172774',
+        createdAt: {
+            $date: '2023-04-11T16:30:00.228Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T16:30:00.228Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -326,6 +542,13 @@ const seller = [
         },
         display_value: 'Phụ Tùng Đồ Chơi Xe Hơi DIQ',
         query_value: '326084',
+        createdAt: {
+            $date: '2023-04-11T16:30:00.228Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T16:30:00.228Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -333,6 +556,13 @@ const seller = [
         },
         display_value: 'Phụ kiện oto 2car',
         query_value: '141367',
+        createdAt: {
+            $date: '2023-04-11T16:30:00.228Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T16:30:00.228Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -340,6 +570,13 @@ const seller = [
         },
         display_value: 'PHỤ KIỆN ĐỒ CHƠI XE GNG',
         query_value: '133720',
+        createdAt: {
+            $date: '2023-04-11T16:30:00.228Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T16:30:00.228Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -347,6 +584,13 @@ const seller = [
         },
         display_value: 'DODAVIET99',
         query_value: '311550',
+        createdAt: {
+            $date: '2023-04-11T16:30:00.228Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T16:30:00.228Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -354,6 +598,13 @@ const seller = [
         },
         display_value: 'SHINDECAL',
         query_value: '112094',
+        createdAt: {
+            $date: '2023-04-11T16:30:00.228Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T16:30:00.228Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -361,6 +612,13 @@ const seller = [
         },
         display_value: 'Phụ Kiện ÔTô Hà Nội 024',
         query_value: '28530',
+        createdAt: {
+            $date: '2023-04-11T16:30:00.228Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T16:30:00.228Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -368,6 +626,13 @@ const seller = [
         },
         display_value: 'TLG Đồ Da Thành Long',
         query_value: '87241',
+        createdAt: {
+            $date: '2023-04-11T16:30:00.228Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T16:30:00.228Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -375,6 +640,13 @@ const seller = [
         },
         display_value: 'otoalovn',
         query_value: '236058',
+        createdAt: {
+            $date: '2023-04-11T16:30:00.229Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T16:30:00.229Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -382,6 +654,13 @@ const seller = [
         },
         display_value: 'Thế Giới Phụ Kiện 84',
         query_value: '256358',
+        createdAt: {
+            $date: '2023-04-11T16:30:00.229Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T16:30:00.229Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -389,6 +668,13 @@ const seller = [
         },
         display_value: 'TAPLO XE HƠI',
         query_value: '306960',
+        createdAt: {
+            $date: '2023-04-11T16:30:00.229Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T16:30:00.229Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -396,6 +682,13 @@ const seller = [
         },
         display_value: 'ĐỒ DA VIỆT 8888',
         query_value: '321299',
+        createdAt: {
+            $date: '2023-04-11T16:30:00.229Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T16:30:00.229Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -403,6 +696,13 @@ const seller = [
         },
         display_value: 'Tân Thành Phụ Tùng',
         query_value: '137438',
+        createdAt: {
+            $date: '2023-04-11T16:30:00.229Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T16:30:00.229Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -410,6 +710,13 @@ const seller = [
         },
         display_value: 'Tem Xe Đẹp',
         query_value: '201865',
+        createdAt: {
+            $date: '2023-04-11T16:30:00.229Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T16:30:00.229Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -417,6 +724,13 @@ const seller = [
         },
         display_value: 'THU DECAL TEM XE MÁY',
         query_value: '239209',
+        createdAt: {
+            $date: '2023-04-11T16:30:00.228Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T16:30:00.228Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -424,6 +738,13 @@ const seller = [
         },
         display_value: 'TỔNG KHO TIỆN ÍCH HN',
         query_value: '196585',
+        createdAt: {
+            $date: '2023-04-11T16:30:00.229Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T16:30:00.229Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -431,6 +752,13 @@ const seller = [
         },
         display_value: 'Kilometre Zero',
         query_value: '5466',
+        createdAt: {
+            $date: '2023-04-11T16:30:00.229Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T16:30:00.229Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -438,6 +766,13 @@ const seller = [
         },
         display_value: 'AZDECAL',
         query_value: '205754',
+        createdAt: {
+            $date: '2023-04-11T16:30:00.228Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T16:30:00.228Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -445,13 +780,13 @@ const seller = [
         },
         display_value: 'Gia dụng uy tín',
         query_value: '119091',
-    },
-    {
-        _id: {
-            $oid: '643660ee6b3ead418fbb0b8b',
+        createdAt: {
+            $date: '2023-04-11T16:30:00.229Z',
         },
-        display_value: 'Honda Ủy Nhiệm Hà Nội',
-        query_value: '142831',
+        updatedAt: {
+            $date: '2023-04-11T16:30:00.229Z',
+        },
+        __v: 0,
     },
 ];
 
@@ -462,6 +797,13 @@ const brand = [
         },
         display_value: 'Macsim',
         query_value: '4642605',
+        createdAt: {
+            $date: '2023-04-11T16:27:15.664Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T16:27:15.664Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -469,6 +811,13 @@ const brand = [
         },
         display_value: 'SKF',
         query_value: '282619',
+        createdAt: {
+            $date: '2023-04-11T16:27:15.664Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T16:27:15.664Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -476,6 +825,13 @@ const brand = [
         },
         display_value: 'Giant',
         query_value: '112365',
+        createdAt: {
+            $date: '2023-04-11T16:27:15.664Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T16:27:15.664Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -483,6 +839,13 @@ const brand = [
         },
         display_value: 'Yamaha',
         query_value: '153444',
+        createdAt: {
+            $date: '2023-04-11T16:27:15.664Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T16:27:15.664Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -490,6 +853,13 @@ const brand = [
         },
         display_value: 'Green Networks Group',
         query_value: '777059',
+        createdAt: {
+            $date: '2023-04-11T16:27:15.664Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T16:27:15.664Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -497,6 +867,13 @@ const brand = [
         },
         display_value: 'RFK cùng bạn vượt thời gian',
         query_value: '7354857',
+        createdAt: {
+            $date: '2023-04-11T16:27:15.664Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T16:27:15.664Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -504,6 +881,13 @@ const brand = [
         },
         display_value: 'Bosch',
         query_value: '25229',
+        createdAt: {
+            $date: '2023-04-11T16:27:15.664Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T16:27:15.664Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -511,6 +895,13 @@ const brand = [
         },
         display_value: '3M',
         query_value: '63747',
+        createdAt: {
+            $date: '2023-04-11T16:27:15.665Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T16:27:15.665Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -518,6 +909,13 @@ const brand = [
         },
         display_value: 'SRT',
         query_value: '699097',
+        createdAt: {
+            $date: '2023-04-11T16:27:15.665Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T16:27:15.665Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -525,6 +923,13 @@ const brand = [
         },
         display_value: 'BANDO',
         query_value: '195471',
+        createdAt: {
+            $date: '2023-04-11T16:27:15.665Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T16:27:15.665Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -532,6 +937,13 @@ const brand = [
         },
         display_value: 'Sparco',
         query_value: '261009',
+        createdAt: {
+            $date: '2023-04-11T16:27:15.665Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T16:27:15.665Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -539,6 +951,13 @@ const brand = [
         },
         display_value: 'Royal',
         query_value: '27561',
+        createdAt: {
+            $date: '2023-04-11T16:27:15.665Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T16:27:15.665Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -546,6 +965,13 @@ const brand = [
         },
         display_value: 'AZDECAL',
         query_value: '5069237',
+        createdAt: {
+            $date: '2023-04-11T16:27:15.664Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T16:27:15.664Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -553,6 +979,13 @@ const brand = [
         },
         display_value: 'Mitsuboshi',
         query_value: '201795',
+        createdAt: {
+            $date: '2023-04-11T16:27:15.665Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T16:27:15.665Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -560,6 +993,13 @@ const brand = [
         },
         display_value: 'Sonax',
         query_value: '181191',
+        createdAt: {
+            $date: '2023-04-11T16:27:15.665Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T16:27:15.665Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -567,6 +1007,13 @@ const brand = [
         },
         display_value: 'Baseus',
         query_value: '21651',
+        createdAt: {
+            $date: '2023-04-11T16:27:15.665Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T16:27:15.665Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -574,6 +1021,13 @@ const brand = [
         },
         display_value: 'UP',
         query_value: '187541',
+        createdAt: {
+            $date: '2023-04-11T16:27:15.664Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T16:27:15.664Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -581,6 +1035,13 @@ const brand = [
         },
         display_value: 'Soft99',
         query_value: '145594',
+        createdAt: {
+            $date: '2023-04-11T16:27:15.665Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T16:27:15.665Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -588,6 +1049,13 @@ const brand = [
         },
         display_value: 'Honda',
         query_value: '152855',
+        createdAt: {
+            $date: '2023-04-11T16:27:15.665Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T16:27:15.665Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -595,6 +1063,13 @@ const brand = [
         },
         display_value: 'Cind',
         query_value: '149055',
+        createdAt: {
+            $date: '2023-04-11T16:27:15.665Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T16:27:15.665Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -602,6 +1077,13 @@ const brand = [
         },
         display_value: 'Liqui Moly',
         query_value: '154039',
+        createdAt: {
+            $date: '2023-04-11T16:27:15.665Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T16:27:15.665Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -609,6 +1091,13 @@ const brand = [
         },
         display_value: 'Wurth',
         query_value: '157557',
+        createdAt: {
+            $date: '2023-04-11T16:27:15.665Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T16:27:15.665Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -616,6 +1105,13 @@ const brand = [
         },
         display_value: 'Mai Lee',
         query_value: '408443',
+        createdAt: {
+            $date: '2023-04-11T16:27:15.665Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T16:27:15.665Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -623,6 +1119,13 @@ const brand = [
         },
         display_value: 'Ekokemika',
         query_value: '239433',
+        createdAt: {
+            $date: '2023-04-11T16:27:15.665Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T16:27:15.665Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -630,6 +1133,13 @@ const brand = [
         },
         display_value: 'AREON',
         query_value: '185213',
+        createdAt: {
+            $date: '2023-04-11T16:27:15.665Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T16:27:15.665Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -637,6 +1147,13 @@ const brand = [
         },
         display_value: 'Denki',
         query_value: '4734315',
+        createdAt: {
+            $date: '2023-04-11T16:27:15.665Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T16:27:15.665Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -644,6 +1161,13 @@ const brand = [
         },
         display_value: 'KATA',
         query_value: '287637',
+        createdAt: {
+            $date: '2023-04-11T16:27:15.665Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T16:27:15.665Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -651,6 +1175,13 @@ const brand = [
         },
         display_value: 'Medicar',
         query_value: '4970183',
+        createdAt: {
+            $date: '2023-04-11T16:27:15.665Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T16:27:15.665Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -658,6 +1189,13 @@ const brand = [
         },
         display_value: 'GIVI',
         query_value: '152290',
+        createdAt: {
+            $date: '2023-04-11T16:27:15.665Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T16:27:15.665Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -665,6 +1203,13 @@ const brand = [
         },
         display_value: 'LS2',
         query_value: '156637',
+        createdAt: {
+            $date: '2023-04-11T16:27:15.665Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T16:27:15.665Z',
+        },
+        __v: 0,
     },
 ];
 
@@ -683,8 +1228,15 @@ const category = [
         sellerBy: [],
         level_category: 1,
         parentCategory: {
-            $oid: '64365a5d6b3ead418fbb0b7d',
+            $oid: '6436d0125052219f9a55fba2',
         },
+        createdAt: {
+            $date: '2023-04-11T15:36:38.531Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T15:36:38.531Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -700,8 +1252,15 @@ const category = [
         sellerBy: [],
         level_category: 1,
         parentCategory: {
-            $oid: '64365a5d6b3ead418fbb0b7d',
+            $oid: '6436d0125052219f9a55fba2',
         },
+        createdAt: {
+            $date: '2023-04-11T15:36:38.531Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T15:36:38.531Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -717,8 +1276,15 @@ const category = [
         sellerBy: [],
         level_category: 1,
         parentCategory: {
-            $oid: '64365a5d6b3ead418fbb0b7d',
+            $oid: '6436d0125052219f9a55fba2',
         },
+        createdAt: {
+            $date: '2023-04-11T15:36:38.531Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T15:36:38.531Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -734,8 +1300,15 @@ const category = [
         sellerBy: [],
         level_category: 1,
         parentCategory: {
-            $oid: '64365a5d6b3ead418fbb0b7d',
+            $oid: '6436d0125052219f9a55fba2',
         },
+        createdAt: {
+            $date: '2023-04-11T15:36:38.532Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T15:36:38.532Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -751,8 +1324,15 @@ const category = [
         sellerBy: [],
         level_category: 1,
         parentCategory: {
-            $oid: '64365a5d6b3ead418fbb0b7d',
+            $oid: '6436d0125052219f9a55fba2',
         },
+        createdAt: {
+            $date: '2023-04-11T15:36:38.532Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T15:36:38.532Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -768,8 +1348,15 @@ const category = [
         sellerBy: [],
         level_category: 1,
         parentCategory: {
-            $oid: '64365a5d6b3ead418fbb0b7d',
+            $oid: '6436d0125052219f9a55fba2',
         },
+        createdAt: {
+            $date: '2023-04-11T15:36:38.532Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T15:36:38.532Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -785,8 +1372,15 @@ const category = [
         sellerBy: [],
         level_category: 1,
         parentCategory: {
-            $oid: '64365a5d6b3ead418fbb0b7d',
+            $oid: '6436d0125052219f9a55fba2',
         },
+        createdAt: {
+            $date: '2023-04-11T15:36:38.532Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T15:36:38.532Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -804,6 +1398,13 @@ const category = [
         parentCategory: {
             $oid: '64357e867fb7b7c8643997ae',
         },
+        createdAt: {
+            $date: '2023-04-11T15:44:15.005Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T15:44:15.005Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -821,6 +1422,13 @@ const category = [
         parentCategory: {
             $oid: '64357e867fb7b7c8643997ae',
         },
+        createdAt: {
+            $date: '2023-04-11T15:44:15.005Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T15:44:15.005Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -838,6 +1446,13 @@ const category = [
         parentCategory: {
             $oid: '64357e867fb7b7c8643997ae',
         },
+        createdAt: {
+            $date: '2023-04-11T15:44:15.005Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T15:44:15.005Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -855,6 +1470,13 @@ const category = [
         parentCategory: {
             $oid: '64357e867fb7b7c8643997ae',
         },
+        createdAt: {
+            $date: '2023-04-11T15:44:15.006Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T15:44:15.006Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -872,6 +1494,13 @@ const category = [
         parentCategory: {
             $oid: '64357e867fb7b7c8643997ae',
         },
+        createdAt: {
+            $date: '2023-04-11T15:44:15.006Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T15:44:15.006Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -889,6 +1518,13 @@ const category = [
         parentCategory: {
             $oid: '64357e867fb7b7c8643997ae',
         },
+        createdAt: {
+            $date: '2023-04-11T15:44:15.006Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T15:44:15.006Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -906,6 +1542,13 @@ const category = [
         parentCategory: {
             $oid: '64357e867fb7b7c8643997ae',
         },
+        createdAt: {
+            $date: '2023-04-11T15:44:15.006Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T15:44:15.006Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -923,6 +1566,13 @@ const category = [
         parentCategory: {
             $oid: '64357e867fb7b7c8643997af',
         },
+        createdAt: {
+            $date: '2023-04-11T15:48:37.864Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T15:48:37.864Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -940,6 +1590,13 @@ const category = [
         parentCategory: {
             $oid: '64357e867fb7b7c8643997af',
         },
+        createdAt: {
+            $date: '2023-04-11T15:48:37.864Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T15:48:37.864Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -957,6 +1614,13 @@ const category = [
         parentCategory: {
             $oid: '64357e867fb7b7c8643997af',
         },
+        createdAt: {
+            $date: '2023-04-11T15:48:37.864Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T15:48:37.864Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -974,6 +1638,13 @@ const category = [
         parentCategory: {
             $oid: '64357e867fb7b7c8643997af',
         },
+        createdAt: {
+            $date: '2023-04-11T15:48:37.864Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T15:48:37.864Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -991,6 +1662,13 @@ const category = [
         parentCategory: {
             $oid: '64357e867fb7b7c8643997b0',
         },
+        createdAt: {
+            $date: '2023-04-11T15:49:32.393Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T15:49:32.393Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -1008,6 +1686,13 @@ const category = [
         parentCategory: {
             $oid: '64357e867fb7b7c8643997b0',
         },
+        createdAt: {
+            $date: '2023-04-11T15:49:32.393Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T15:49:32.393Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -1025,6 +1710,13 @@ const category = [
         parentCategory: {
             $oid: '64357e867fb7b7c8643997b0',
         },
+        createdAt: {
+            $date: '2023-04-11T15:49:32.393Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T15:49:32.393Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -1042,6 +1734,13 @@ const category = [
         parentCategory: {
             $oid: '64357e867fb7b7c8643997b0',
         },
+        createdAt: {
+            $date: '2023-04-11T15:49:32.393Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T15:49:32.393Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -1059,6 +1758,13 @@ const category = [
         parentCategory: {
             $oid: '64357e867fb7b7c8643997b0',
         },
+        createdAt: {
+            $date: '2023-04-11T15:49:32.393Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T15:49:32.393Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -1076,6 +1782,13 @@ const category = [
         parentCategory: {
             $oid: '64357e867fb7b7c8643997b0',
         },
+        createdAt: {
+            $date: '2023-04-11T15:49:32.393Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T15:49:32.393Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -1093,6 +1806,13 @@ const category = [
         parentCategory: {
             $oid: '64357e867fb7b7c8643997b2',
         },
+        createdAt: {
+            $date: '2023-04-11T15:51:12.880Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T15:51:12.880Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -1110,6 +1830,13 @@ const category = [
         parentCategory: {
             $oid: '64357e867fb7b7c8643997b2',
         },
+        createdAt: {
+            $date: '2023-04-11T15:51:12.880Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T15:51:12.880Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -1127,6 +1854,13 @@ const category = [
         parentCategory: {
             $oid: '64357e867fb7b7c8643997b2',
         },
+        createdAt: {
+            $date: '2023-04-11T15:51:12.880Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T15:51:12.880Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -1144,6 +1878,13 @@ const category = [
         parentCategory: {
             $oid: '64357e867fb7b7c8643997b2',
         },
+        createdAt: {
+            $date: '2023-04-11T15:51:12.880Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T15:51:12.880Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -1161,6 +1902,13 @@ const category = [
         parentCategory: {
             $oid: '64357e867fb7b7c8643997b2',
         },
+        createdAt: {
+            $date: '2023-04-11T15:51:12.881Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T15:51:12.881Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -1178,6 +1926,13 @@ const category = [
         parentCategory: {
             $oid: '64357e867fb7b7c8643997b2',
         },
+        createdAt: {
+            $date: '2023-04-11T15:51:12.881Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T15:51:12.881Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -1195,6 +1950,13 @@ const category = [
         parentCategory: {
             $oid: '64357e867fb7b7c8643997b2',
         },
+        createdAt: {
+            $date: '2023-04-11T15:51:12.880Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T15:51:12.880Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -1212,6 +1974,13 @@ const category = [
         parentCategory: {
             $oid: '64357e867fb7b7c8643997b2',
         },
+        createdAt: {
+            $date: '2023-04-11T15:51:12.880Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T15:51:12.880Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -1229,6 +1998,13 @@ const category = [
         parentCategory: {
             $oid: '64357e867fb7b7c8643997b3',
         },
+        createdAt: {
+            $date: '2023-04-11T15:52:11.317Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T15:52:11.317Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -1246,6 +2022,13 @@ const category = [
         parentCategory: {
             $oid: '64357e867fb7b7c8643997b3',
         },
+        createdAt: {
+            $date: '2023-04-11T15:52:11.318Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T15:52:11.318Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -1263,6 +2046,13 @@ const category = [
         parentCategory: {
             $oid: '64357e867fb7b7c8643997b3',
         },
+        createdAt: {
+            $date: '2023-04-11T15:52:11.318Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T15:52:11.318Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -1280,6 +2070,13 @@ const category = [
         parentCategory: {
             $oid: '64357e867fb7b7c8643997b3',
         },
+        createdAt: {
+            $date: '2023-04-11T15:52:11.318Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T15:52:11.318Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -1297,6 +2094,13 @@ const category = [
         parentCategory: {
             $oid: '64357e867fb7b7c8643997b3',
         },
+        createdAt: {
+            $date: '2023-04-11T15:52:11.318Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T15:52:11.318Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -1314,6 +2118,13 @@ const category = [
         parentCategory: {
             $oid: '64357e867fb7b7c8643997b3',
         },
+        createdAt: {
+            $date: '2023-04-11T15:52:11.318Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T15:52:11.318Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -1331,6 +2142,13 @@ const category = [
         parentCategory: {
             $oid: '64357e867fb7b7c8643997b3',
         },
+        createdAt: {
+            $date: '2023-04-11T15:52:11.318Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T15:52:11.318Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -1348,6 +2166,13 @@ const category = [
         parentCategory: {
             $oid: '64357e867fb7b7c8643997b3',
         },
+        createdAt: {
+            $date: '2023-04-11T15:52:11.318Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T15:52:11.318Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -1365,6 +2190,13 @@ const category = [
         parentCategory: {
             $oid: '64357e867fb7b7c8643997b3',
         },
+        createdAt: {
+            $date: '2023-04-11T15:52:11.318Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T15:52:11.318Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -1382,6 +2214,13 @@ const category = [
         parentCategory: {
             $oid: '64357e867fb7b7c8643997b3',
         },
+        createdAt: {
+            $date: '2023-04-11T15:52:11.318Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T15:52:11.318Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -1399,6 +2238,13 @@ const category = [
         parentCategory: {
             $oid: '64357e867fb7b7c8643997b4',
         },
+        createdAt: {
+            $date: '2023-04-11T15:53:10.753Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T15:53:10.753Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -1416,6 +2262,13 @@ const category = [
         parentCategory: {
             $oid: '64357e867fb7b7c8643997b4',
         },
+        createdAt: {
+            $date: '2023-04-11T15:53:10.753Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T15:53:10.753Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -1433,6 +2286,13 @@ const category = [
         parentCategory: {
             $oid: '64357e867fb7b7c8643997b4',
         },
+        createdAt: {
+            $date: '2023-04-11T15:53:10.754Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T15:53:10.754Z',
+        },
+        __v: 0,
     },
     {
         _id: {
@@ -1450,13 +2310,20 @@ const category = [
         parentCategory: {
             $oid: '64357e867fb7b7c8643997b4',
         },
+        createdAt: {
+            $date: '2023-04-11T15:53:10.754Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T15:53:10.754Z',
+        },
+        __v: 0,
     },
     {
         _id: {
-            $oid: '64365a5d6b3ead418fbb0b7d',
+            $oid: '6436d0125052219f9a55fba2',
         },
         query_value: 8594,
-        display_value: 'Xe máy',
+        display_value: 'Ô tô xe máy xe đạp',
         url_key: 'o-to-xe-may-xe-dap',
         url_path: '/o-to-xe-may-xe-dap/c8594',
         product: [],
@@ -1465,5 +2332,12 @@ const category = [
         sellerBy: [],
         level_category: 0,
         parentCategory: null,
+        createdAt: {
+            $date: '2023-04-11T15:36:38.531Z',
+        },
+        updatedAt: {
+            $date: '2023-04-11T15:36:38.531Z',
+        },
+        __v: 0,
     },
 ];

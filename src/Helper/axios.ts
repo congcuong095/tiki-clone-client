@@ -51,10 +51,11 @@ export const getAPISearch = async (keyword: any): Promise<any> => {
 //     return { props: { data } };
 // }
 
-export const getAPIFake = async (): Promise<any> => {
+export const postAPIFake = async (data: any): Promise<any> => {
     return await axios({
-        url: `http://localhost:3001/product/643678ccbdb4bd3c3bede48c`,
-        method: 'get',
+        url: `http://localhost:3001/product/post`,
+        method: 'post',
+        data: data,
     })
         .then(({ status, data }) => {
             console.log(data);
