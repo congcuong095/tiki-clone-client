@@ -50,3 +50,24 @@ export const getAPISearch = async (keyword: any): Promise<any> => {
 
 //     return { props: { data } };
 // }
+
+export const getAPIFake = async (): Promise<any> => {
+    return await axios({
+        url: `http://localhost:3001/product/643678ccbdb4bd3c3bede48c`,
+        method: 'get',
+    })
+        .then(({ status, data }) => {
+            console.log(data);
+            return {
+                status: status,
+                data: data,
+            };
+        })
+        .catch((error) => {
+            console.log(error);
+            return {
+                status: error.status,
+                data: error.response,
+            };
+        });
+};

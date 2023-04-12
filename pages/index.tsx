@@ -1,7 +1,7 @@
 import Product from '@/src/components/Product/Product';
 import ProductLayout from '@/src/Layout/ProductLayout';
 import { createContext, useEffect, useState } from 'react';
-import { getAPIProduct } from '@/src/Entity/axios';
+import { getAPIFake, getAPIProduct } from '@/src/Entity/axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProducts } from '@/src/Store/Actions';
 
@@ -13,14 +13,14 @@ export default function Home() {
     const dispatch = useDispatch();
 
     useEffect(() => {
+        getAPIFake().then((res) => console.log(res));
         getAPIProduct(param).then((res) => {
             setDataProduct(res.data);
-
+            console.log(new Date());
             dispatch(fetchProducts(res));
         });
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [param]);
-    console.log(dataProduct);
     return (
         <DataContext.Provider value={{ setDataProduct, dataProduct }}>
             <ProductLayout>
