@@ -98,7 +98,7 @@ function PriceFilterSidebar() {
                                             setPriceIndex(index);
                                             handleFilterPrice(e, maxPrice, minPrice, index);
                                         }}
-                                        className="bg-[#eeeeee] px-[12px] py-[4px] leading-[16px] inline-block relative text-textPrimary rounded-[12px] mb-[4px] text-[13px]"
+                                        className="bg-[#eeeeee] px-[12px] py-[4px] leading-[16px] inline-block relative text-textPrimary rounded-[12px] mb-[4px] text-[12px]"
                                     >
                                         {item.display_value}
                                     </span>

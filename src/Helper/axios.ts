@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export const getAPIProduct = async (parameter: any): Promise<any> => {
     return await axios({
-        url: `https://tiki.vn/api/personalish/v1/blocks/listings`,
+        url: `http://localhost:3001/product/listing`,
         method: 'get',
         params: { ...parameter },
     })

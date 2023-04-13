@@ -2,11 +2,8 @@ import actionType from '../Actions/actionType';
 
 const initState: any = {
     limit: 40,
-    include: 'advertisement',
-    aggregations: 2,
     category: 8594,
     page: 1,
-    trackity_id: 'c6f19eee-d118-ea27-ead1-840849028e16',
     urlKey: 'o-to-xe-may-xe-dap',
 };
 
