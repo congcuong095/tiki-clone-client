@@ -10,8 +10,15 @@ export default function PostData() {
     const [product, setProduct] = useState<any>('');
 
     const handlePost = async () => {
+        let convertProduct = JSON.parse(product);
+
+        convertProduct.advertisement != null
+            ? (convertProduct.advertisement = true)
+            : (convertProduct.advertisement = false);
+
         let data = {
-            ...JSON.parse(product),
+            ...convertProduct,
+
             category: checkCategory,
             color: checkColor,
             brand: checkBrand,
@@ -25,9 +32,9 @@ export default function PostData() {
     return (
         <>
             <div className=" p-[20px] columns-5">
-                <div className=" col-span-2 h-[300px] overflow-scroll">
-                    <div>Cross Border</div>
-                    {crossBorder.map((item, index) => {
+                <div className=" col-span-2 h-[300px] overflow-scroll ">
+                    <div>Category</div>
+                    {category.map((item, index) => {
                         return (
                             <div key={index} className="mb-[0.125rem] block min-h-[1.5rem] pl-[1.5rem]">
                                 <input
@@ -35,18 +42,23 @@ export default function PostData() {
                                     type="checkbox"
                                     value=""
                                     id="checkboxDefault"
-                                    onChange={() => setCheckCrossBorder((prev: any) => [...prev, item._id.$oid])}
+                                    onChange={() => setCheckCategory((prev: any) => [...prev, item._id.$oid])}
                                 />
                                 <label
                                     className="inline-block pl-[0.15rem] hover:cursor-pointer"
                                     htmlFor="checkboxDefault"
                                 >
-                                    {item.display_value}
+                                    {`"${item.display_value}"` +
+                                        ' lv' +
+                                        item.level_category +
+                                        ' ' +
+                                        item.parentCategory?.$oid}
                                 </label>
                             </div>
                         );
                     })}
                 </div>
+
                 <div className=" col-span-2 h-[300px] overflow-scroll ">
                     <div>Color</div>
                     {color.map((item, index) => {
@@ -113,9 +125,9 @@ export default function PostData() {
                         );
                     })}
                 </div>
-                <div className=" col-span-2 h-[300px] overflow-scroll ">
-                    <div>Category</div>
-                    {category.map((item, index) => {
+                <div className=" col-span-2 h-[300px] overflow-scroll">
+                    <div>Cross Border</div>
+                    {crossBorder.map((item, index) => {
                         return (
                             <div key={index} className="mb-[0.125rem] block min-h-[1.5rem] pl-[1.5rem]">
                                 <input
@@ -123,17 +135,13 @@ export default function PostData() {
                                     type="checkbox"
                                     value=""
                                     id="checkboxDefault"
-                                    onChange={() => setCheckCategory((prev: any) => [...prev, item._id.$oid])}
+                                    onChange={() => setCheckCrossBorder((prev: any) => [...prev, item._id.$oid])}
                                 />
                                 <label
                                     className="inline-block pl-[0.15rem] hover:cursor-pointer"
                                     htmlFor="checkboxDefault"
                                 >
-                                    {`"${item.display_value}"` +
-                                        ' lv' +
-                                        item.level_category +
-                                        ' ' +
-                                        item.parentCategory?.$oid}
+                                    {item.display_value}
                                 </label>
                             </div>
                         );
