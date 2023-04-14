@@ -9,7 +9,7 @@ import { useSelector } from 'react-redux';
 
 function Sidebar() {
     const dataProduct = useSelector((state: any) => state.ProductReducer).data;
-    const dataFilters = dataProduct.filters;
+    const dataFilters = dataProduct.filters && dataProduct.filters.slice();
 
     let arrSelect;
     let cross_border;

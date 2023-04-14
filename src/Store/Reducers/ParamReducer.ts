@@ -7,7 +7,7 @@ const initState: any = {
     urlKey: 'o-to-xe-may-xe-dap',
 };
 
-export default function ParamReducer(state = initState, action: any) {
+export default function ParamReducer(state = { ...initState }, action: any) {
     switch (action.type) {
         case actionType.UPDATE_PARAM:
             return { ...state, ...action.payload };
@@ -20,7 +20,6 @@ export default function ParamReducer(state = initState, action: any) {
             };
         case actionType.RESET_PARAM:
             return initState;
-
         default:
             return state;
     }

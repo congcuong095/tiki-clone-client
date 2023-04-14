@@ -2,12 +2,14 @@ import { DataContext } from '@/pages';
 import { RemoveParam, ResetParam, UpdateParam } from '@/src/Store/Actions';
 import images from '@/src/assets/image';
 import Image from 'next/image';
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import TopProductArticle from '../Article/TopProductArticle';
 
 function HeaderProduct() {
     const dataProduct = useSelector((state: any) => state.ProductReducer).data;
+    const [categorySelect, setCategorySelect] = useState<any>();
+    const [dataQueryName, setDataQueryName] = useState('');
     const dataSort = dataProduct.sort_options;
     const dataFilters = dataProduct.filters;
     function filterService(x: any) {
@@ -66,13 +68,17 @@ function HeaderProduct() {
 
     const handleSortBottom = () => {
         let arr: JSX.Element[] = [];
-        let liFunc = (content: string) => {
+        let liFunc = (content: any, selected: any, query_value: any, query_name: any) => {
             return (
                 <p
                     key={content}
+                    onClick={() => handleFilter(selected, query_value, query_name)}
                     className="filter-bottom-item bg-[#dbeeff] border border-solid border-[#1a94ff] cursor-pointer text-[#1a94ff] text-[13px] px-[12px] py-[10px] leading-[20px] relative rounded-[100px] flex mr-[10px] mb-0 h-[32px] items-center"
                 >
                     {content}
+                    <span className=" flex">
+                        <Image src={images.closeIcon} alt="" className=" w-[18px] h-[18px] ml-[11px]" />
+                    </span>
                 </p>
             );
         };
@@ -81,14 +87,14 @@ function HeaderProduct() {
                 if (item.query_name == 'support_installment') {
                     item.values.forEach((x: any) => {
                         if (x.selected) {
-                            const li = liFunc(item.display_name);
+                            const li = liFunc(item.display_name, item.selected, item.query_value, item.query_name);
                             arr.push(li);
                         }
                     });
                 } else {
                     item.values.forEach((x: any) => {
                         if (x.selected) {
-                            const li = liFunc(x.display_value);
+                            const li = liFunc(x.display_value, x.selected, x.query_value, item.query_name);
                             arr.push(li);
                         }
                     });
@@ -97,8 +103,38 @@ function HeaderProduct() {
         return arr;
     };
 
+    const handleFilter = (select: boolean, query_value: any, data: any) => {
+        if (categorySelect == undefined) {
+            setCategorySelect([query_value]);
+        }
+        if (categorySelect != undefined && !select) {
+            setCategorySelect((prev: any) => [...prev, query_value]);
+        }
+        if (categorySelect != undefined && select) {
+            setCategorySelect(categorySelect.filter((x: any) => x != query_value));
+        }
+
+        setDataQueryName(data);
+    };
+
+    useEffect(() => {
+        if (categorySelect == undefined || categorySelect.length == 0) {
+            const removeParam = [dataQueryName];
+            dispatch(RemoveParam(removeParam));
+        } else {
+            dispatch(
+                UpdateParam({
+                    [dataQueryName]: categorySelect.join(),
+                }),
+            );
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [categorySelect]);
+
     const handleResetSort = () => {
         dispatch(ResetParam());
+        setCategorySelect([]);
+        setDataQueryName('');
     };
     return (
         <>
@@ -243,9 +279,7 @@ function HeaderProduct() {
                                 onClick={() => handleResetSort()}
                                 className="filter-bottom-item bg-[#ffffff] border border-solid border-[transparent] cursor-pointer text-[#1a94ff] text-[13px] px-[12px] py-[10px] leading-[20px] relative rounded-[100px] flex mr-[10px] mb-0 h-[32px] items-center font-medium"
                             >
-                                <a href="./" className=" text-[#1a94ff] flex">
-                                    Xóa tất cả
-                                </a>
+                                <span className=" text-[#1a94ff] flex">Xóa tất cả</span>
                             </p>
                         )}
                     </div>

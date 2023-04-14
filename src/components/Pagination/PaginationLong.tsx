@@ -5,7 +5,7 @@ import images from '@/src/assets/image';
 
 function PaginationLong() {
     const dataProduct = useSelector((state: any) => state.ProductReducer).data;
-    const dataPaging = dataProduct.paging;
+    const dataPaging = dataProduct && dataProduct.paging;
     const dispatch = useDispatch();
     const handleChoosePage = (selectPage: number) => {
         dispatch(
@@ -44,9 +44,9 @@ function PaginationLong() {
         return arrPage;
     };
     const handlePageNumber = () => {
-        const current = dataPaging.current_page;
-        const last = dataPaging.last_page;
-        if (dataPaging.last_page > 5) {
+        const current = dataPaging && dataPaging.current_page;
+        const last = dataPaging && dataPaging.last_page;
+        if (last > 5) {
             let arrPage: JSX.Element[] = [];
             const ThreeDot = (
                 <>

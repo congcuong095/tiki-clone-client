@@ -25,7 +25,7 @@ function ServiceFilterSidebar() {
 
     return (
         <>
-            {service && (
+            {service.length > 0 && (
                 <div className="list px-[16px] pb-[12px] border-t border-solid border-[#ebebf0]">
                     <h4 className="list-title m-0 leading-[20px] block text-textPrimary text-[14px] py-[12px] font-medium">
                         Dịch vụ

@@ -66,7 +66,7 @@ function FilterSelectInput({ data }: any) {
                                 className=" flex items-center text-[13px] leading-[16px] capitalize mb-[12px] text-textPrimary"
                                 onClick={() => handleFilter(item.selected, item.query_value)}
                             >
-                                <SelectInput content={item.display_value} image={item.image} />
+                                <SelectInput content={item.display_value} image={item.image} selected={item.selected} />
                             </label>
                         );
                     })}
