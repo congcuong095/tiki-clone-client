@@ -19,6 +19,7 @@ export default function Home() {
         });
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [param]);
+    console.log(dataProduct);
     return (
         <DataContext.Provider value={{ setDataProduct, dataProduct }}>
             <ProductLayout>

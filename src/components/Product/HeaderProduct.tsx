@@ -10,8 +10,8 @@ function HeaderProduct() {
     const dataProduct = useSelector((state: any) => state.ProductReducer).data;
     const [categorySelect, setCategorySelect] = useState<any>();
     const [dataQueryName, setDataQueryName] = useState('');
-    const dataSort = dataProduct.sort_options;
-    const dataFilters = dataProduct.filters;
+    const dataSort = dataProduct && dataProduct.sort_options;
+    const dataFilters = dataProduct && dataProduct.filters;
     function filterService(x: any) {
         return x.query_name == 'support_p2h_delivery' || x.query_name == 'seller_asa_cashback';
     }
@@ -24,7 +24,7 @@ function HeaderProduct() {
     }
     const dataService = dataFilters && dataFilters.filter(filterService);
     const dataFilter = dataFilters && dataFilters.filter(filters);
-    const dataPage = dataProduct.paging;
+    const dataPage = dataProduct && dataProduct.paging;
     const dispatch = useDispatch();
 
     const param = useSelector((state: any) => state.ParamReducer);
